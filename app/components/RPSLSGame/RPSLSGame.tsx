@@ -2,8 +2,11 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
-import { choices, Choice, Outcomes } from "./RPSLSTypes";
+import { capitalize } from "@/utils/utils";
+
+import { choices, Choice, Outcomes, winningCombos } from "./RPSLSTypes";
 
 const outcomes: Outcomes = {
   rock: {
@@ -47,19 +50,49 @@ export default function RPSLSGame() {
   const [userChoice, setUserChoice] = useState<Choice | null>(null);
   const [computerChoice, setComputerChoice] = useState<Choice | null>(null);
   const [result, setResult] = useState<string>("");
+  const [countdown, setCountdown] = useState<number | null>(null);
+  const [showResult, setShowResult] = useState<boolean>(false); // Controls when to show results
 
   const playGame = (choice: Choice) => {
-    const compChoice = choices[Math.floor(Math.random() * choices.length)];
     setUserChoice(choice);
+    setComputerChoice(null); // Reset previous computer choice
+    setResult(""); // Reset previous result
+    setShowResult(false); // Hide results initially
+    setCountdown(3); // Start countdown from 3
+
+    let count = 3;
+    const interval = setInterval(() => {
+      count -= 1;
+      setCountdown(count);
+
+      if (count === 0) {
+        clearInterval(interval);
+        determineWinner(choice);
+      }
+    }, 1000);
+  };
+
+  const determineWinner = (choice: Choice) => {
+    const compChoice = choices[Math.floor(Math.random() * choices.length)];
     setComputerChoice(compChoice);
 
     if (choice === compChoice) {
-      setResult("The result is a tie!");
-    } else if (outcomes[choice] && outcomes[choice][compChoice]) {
-      setResult(outcomes[choice][compChoice]);
+      setResult("It's a tie!");
     } else {
-      setResult("Error: Invalid choice.");
+      // Check if user wins
+      const userWins = winningCombos.some(
+        ([winner, loser]) => winner === choice && loser === compChoice
+      );
+
+      if (userWins) {
+        setResult(`You win! ${outcomes[choice][compChoice]}`);
+      } else {
+        setResult(`Computer wins! ${outcomes[compChoice][choice]}`);
+      }
     }
+
+    setCountdown(null); // Hide countdown
+    setShowResult(true); // Show result messages
   };
 
   return (
@@ -70,16 +103,28 @@ export default function RPSLSGame() {
           <button
             key={choice}
             onClick={() => playGame(choice)}
-            className="m-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200"
+            className="p-2 bg-transparent border-none"
           >
-            {choice.charAt(0).toUpperCase() + choice.slice(1)}
+            <Image
+              src={`/images/icons/${choice}-icon.png`}
+              alt={`${choice} icon`}
+              width={80}
+              height={80}
+              className="rounded-lg hover:scale-110 transition-transform duration-200"
+            />
           </button>
         ))}
       </div>
-      {userChoice && computerChoice && (
+
+      {/* Show countdown first, then switch to results */}
+      {countdown !== null && (
+        <h2 className="text-6xl font-bold mt-4 animate-pulse">{countdown}</h2>
+      )}
+
+      {showResult && userChoice && computerChoice && (
         <div className="mt-4">
-          <p className="text-lg">You chose: <strong>{userChoice}</strong></p>
-          <p className="text-lg">Computer chose: <strong>{computerChoice}</strong></p>
+          <p className="text-lg">You chose: <strong>{capitalize(userChoice)}</strong></p>
+          <p className="text-lg">Computer chose: <strong>{capitalize(computerChoice)}</strong></p>
           <h2 className="text-xl font-semibold">{result}</h2>
         </div>
       )}
