@@ -4,6 +4,7 @@ export default {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./public/**/*.{html,js}",
+    "./app/globals.css",
   ],
   theme: {
     extend: {

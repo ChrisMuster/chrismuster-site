@@ -23,4 +23,90 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
+
+/* Custom margin spacing utilities */
+/* Custom margin-bottom spacing */
+.mb-none { margin-bottom: 0px; }
+.mb-small { margin-bottom: 2rem; }
+.mb-medium { margin-bottom: 4rem; }
+.mb-large { margin-bottom: 6rem; }
+
+/* Custom margin-top spacing */
+.mt-none { margin-top: 0px; }
+.mt-small { margin-top: 2rem; }
+.mt-medium { margin-top: 4rem; }
+.mt-large { margin-top: 6rem; }
+
+/* Custom margin-left spacing */
+.ml-none { margin-left: 0px; }
+.ml-small { margin-left: 2rem; }
+.ml-medium { margin-left: 4rem; }
+.ml-large { margin-left: 6rem; }
+
+/* Custom margin-right spacing */
+.mr-none { margin-right: 0px; }
+.mr-small { margin-right: 2rem; }
+.mr-medium { margin-right: 4rem; }
+.mr-large { margin-right: 6rem; }
+
+/* Custom horizontal margin (left & right) */
+.mx-none { margin-left: 0px; margin-right: 0px; }
+.mx-small { margin-left: 2rem; margin-right: 2rem; }
+.mx-medium { margin-left: 4rem; margin-right: 4rem; }
+.mx-large { margin-left: 6rem; margin-right: 6rem; }
+
+/* Custom vertical margin (top & bottom) */
+.my-none { margin-top: 0px; margin-bottom: 0px; }
+.my-small { margin-top: 2rem; margin-bottom: 2rem; }
+.my-medium { margin-top: 4rem; margin-bottom: 4rem; }
+.my-large { margin-top: 6rem; margin-bottom: 6rem; }
+
+/* Custom overall margin (all sides) */
+.m-none { margin: 0px; }
+.m-small { margin: 2rem; }
+.m-medium { margin: 4rem; }
+.m-large { margin: 6rem; }
+
+/* Custom padding-top spacing */
+.pt-none { padding-top: 0px; }
+.pt-small { padding-top: 2rem; }
+.pt-medium { padding-top: 4rem; }
+.pt-large { padding-top: 6rem; }
+
+/* Custom padding-bottom spacing */
+.pb-none { padding-bottom: 0px; }
+.pb-small { padding-bottom: 2rem; }
+.pb-medium { padding-bottom: 4rem; }
+.pb-large { padding-bottom: 6rem; }
+
+/* Custom padding-left spacing */
+.pl-none { padding-left: 0px; }
+.pl-small { padding-left: 2rem; }
+.pl-medium { padding-left: 4rem; }
+.pl-large { padding-left: 6rem; }
+
+/* Custom padding-right spacing */
+.pr-none { padding-right: 0px; }
+.pr-small { padding-right: 2rem; }
+.pr-medium { padding-right: 4rem; }
+.pr-large { padding-right: 6rem; }
+
+/* Custom horizontal padding (left & right) */
+.px-none { padding-left: 0px; padding-right: 0px; }
+.px-small { padding-left: 2rem; padding-right: 2rem; }
+.px-medium { padding-left: 4rem; padding-right: 4rem; }
+.px-large { padding-left: 6rem; padding-right: 6rem; }
+
+/* Custom vertical padding (top & bottom) */
+.py-none { padding-top: 0px; padding-bottom: 0px; }
+.py-small { padding-top: 2rem; padding-bottom: 2rem; }
+.py-medium { padding-top: 4rem; padding-bottom: 4rem; }
+.py-large { padding-top: 6rem; padding-bottom: 6rem; }
+
+/* Custom overall padding (all sides) */
+.p-none { padding: 0px; }
+.p-small { padding: 2rem; }
+.p-medium { padding: 4rem; }
+.p-large { padding: 6rem; }

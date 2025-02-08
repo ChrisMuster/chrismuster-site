@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 
+import Section from "@/components/section/section";
+import { Accordion, AccordionTab } from "@/components/accordion/accordion";
 import RPSLSGame from '@/components/RPSLSGame/RPSLSGame';
 import Modal from '@/components/modal/modal';
 
@@ -10,38 +12,49 @@ export default function Homepage() {
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
-  
+
   return (
     <>      
-      <section id="about" className="h-screen flex flex-col items-center justify-center">
-        <h2 className="text-4xl mb-4">About</h2>
-      </section>
+      <Section id="about" fullWidth spacing="none">
+        <h2 className="text-4xl my-small">About</h2>
+        <div className="w-full bg-white h-full text-gray-700">Test div</div>
+      </Section>
 
-      <section id="code-challenges" className="h-screen flex flex-col items-center justify-center">
-        <h2 className="text-4xl mb-4">Code Challenges</h2>
-        <RPSLSGame />
-      </section>
+      <Section id="code-challenges" spacing="none">
+        <h2 className="text-4xl my-small">Code Challenges</h2>
+        <div className="w-full bg-white h-full text-gray-700">
+          <Accordion>
+            <AccordionTab title="Rock, Paper, Scissors, Lizard, Spock">
+              <RPSLSGame />
+            </AccordionTab>
+          </Accordion>
+        </div>
+      </Section>
 
-      <section id="projects" className="h-screen flex flex-col items-center justify-center">
-        <h2 className="text-4xl mb-4">Projects</h2>
-        <button onClick={handleOpenModal} className="px-4 py-2 bg-blue text-white rounded">
-          Open Modal
-        </button>
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-          <div className="w-full max-w-[500px] p-4">
-            <h2 className="text-lg text-black font-bold">Modal Title</h2>
-            <p className="text-black">This is the content of the modal.</p>
-          </div>
-        </Modal>
-      </section>
+      <Section id="projects" spacing="none">
+        <h2 className="text-4xl my-small">Projects</h2>
+        <div className="w-full bg-white h-full text-gray-700">
+          <button onClick={handleOpenModal} className="px-4 py-2 bg-blue text-white rounded">
+            Open Modal
+          </button>
+          <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+            <div className="w-full max-w-[500px] p-4">
+              <h2 className="text-lg text-black font-bold">Modal Title</h2>
+              <p className="text-black">This is the content of the modal.</p>
+            </div>
+          </Modal>
+        </div>
+      </Section>
 
-      <section id="websites" className="h-screen flex flex-col items-center justify-center">
-        <h2 className="text-4xl mb-4">Websites</h2>
-      </section>
+      <Section id="websites" spacing="none">
+        <h2 className="text-4xl my-small">Websites</h2>
+        <div className="w-full bg-white h-full text-gray-700">Test div</div>
+      </Section>
 
-      <section id="contact" className="h-screen flex flex-col items-center justify-center">
-        <h2 className="text-4xl mb-4">Contact</h2>
-      </section>
+      <Section id="contact" spacing="small">
+        <h2 className="text-4xl my-small">Contact</h2>
+        <div className="w-full bg-white h-full text-gray-700">Test div</div>
+      </Section>
     </>
   );
 }
