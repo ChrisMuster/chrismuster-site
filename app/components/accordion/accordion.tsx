@@ -5,10 +5,12 @@ import Image from "next/image";
 
 import { AccordionProps, AccordionTabProps } from "@/components/accordion/accordion.types";
 
+import { cleanClassNames } from "@/utils/utils";
+
 
 export function Accordion({ children, className = "" }: AccordionProps) {
   return (
-    <div className={`w-full ${className}`}>
+    <div className={cleanClassNames("accordion w-full", className)}>
       {children}
     </div>
   );
@@ -18,11 +20,11 @@ export function AccordionTab({ title, children, openByDefault = false, className
   const [isOpen, setIsOpen] = useState(openByDefault);
 
   return (
-    <div className={`border-b border-gray-300 ${className}`}>
+    <div className={cleanClassNames("accordion-tab border-b border-gray-300", className)}>
       {/* Tab Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200 transition"
+        className="accordion-tab-btn w-full flex justify-between items-center p-xxsmall bg-gray-100 hover:bg-gray-200 transition"
       >
         <span className="font-semibold">{title}</span>
         <Image
@@ -36,7 +38,7 @@ export function AccordionTab({ title, children, openByDefault = false, className
 
       {/* Tab Content */}
       <div
-        className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[1000px] p-4" : "max-h-0 p-0"
+        className={`accordion-tab-content overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[1000px] p-xxsmall" : "max-h-0 p-none"
           }`}
       >
         {children}

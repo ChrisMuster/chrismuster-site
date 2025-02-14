@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Section from "@/components/section/section";
 import Hero from "@/components/hero/hero";
@@ -23,7 +23,7 @@ export default function Homepage() {
 
   return (
     <>      
-      <Section id="about" fullWidth spacing="none">
+      <Section id="about" fullWidth>
         <Hero image={about.hero.image} imageAlt={about.hero.imageAlt} overlayAlignment="left" textAlignment="left">
           <h1 className="text-4xl font-bold">{about.hero.title}</h1>
           <h2 className="text-2xl font-bold">{about.hero.subtitle}</h2>
@@ -36,13 +36,13 @@ export default function Homepage() {
             onClick={() => {
               scrollToSection("contact");
             }}
-            className="w-fit mt-xsmall bg-[var(--color-blue)] hover:bg-blue-900 text-white px-4 py-2 rounded-md">
+            className="w-fit mt-xsmall bg-[var(--color-blue)] hover:bg-blue-900 text-white px-xxsmall py-2 rounded-md">
             {about.button_text}
           </button>
         </div>
       </Section>
 
-      <Section id="code-challenges" spacing="none" bgColor="bg-[gray]">
+      <Section id="code-challenges" bgColor="bg-[gray]">
         <h2 className="text-4xl my-small text-center">{code_challenges.title}</h2>
         <div className="w-full bg-white h-auto">
           <Accordion>
@@ -53,14 +53,14 @@ export default function Homepage() {
         </div>
       </Section>
 
-      <Section id="projects" spacing="none">
+      <Section id="projects">
         <h2 className="text-4xl my-small text-center">{projects.title}</h2>
         <div className="w-full bg-white h-full">
-          <button onClick={handleOpenModal} className="px-4 py-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded">
+          <button onClick={handleOpenModal} className="px-xxsmall py-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded">
             Open Modal
           </button>
           <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-            <div className="w-full max-w-[500px] p-4">
+            <div className="w-full max-w-[500px] p-xxsmall">
               <h2 className="text-lg font-bold">Modal Title</h2>
               <p>This is the content of the modal.</p>
             </div>
@@ -68,7 +68,7 @@ export default function Homepage() {
         </div>
       </Section>
 
-      <Section id="websites" spacing="none">
+      <Section id="websites">
         <h2 className="text-4xl my-small text-center">{websites.title}</h2>
         <div className="w-full bg-white h-full">
           <Grid gap="medium" sm={1} md={2} xl={3}>
@@ -106,7 +106,7 @@ export default function Homepage() {
         </div>
       </Section>
 
-      <Section id="contact" spacing="small">
+      <Section id="contact">
         <h2 className="text-4xl my-small text-center">{contact.title}</h2>
         <div className="w-full bg-white h-full">Test div</div>
       </Section>

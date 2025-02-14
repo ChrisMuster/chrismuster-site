@@ -1,5 +1,7 @@
 import { GridProps } from "@/components/grid/grid.types";
 
+import { cleanClassNames } from "@/utils/utils";
+
 export default function Grid({
   children,
   gap = "medium",
@@ -30,6 +32,6 @@ export default function Grid({
   ]
     .filter(Boolean) // Remove any empty strings
     .join(" ");
-
-  return <div className={`grid ${responsiveClasses} ${gapClass} ${className}`}>{children}</div>;
+  
+  return <div className={cleanClassNames("grid", responsiveClasses, gapClass, className)}>{children}</div>;
 }

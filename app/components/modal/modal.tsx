@@ -4,7 +4,9 @@
 import React, { useEffect } from 'react';
 import { ModalProps } from '@/components/modal/modal.types';
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className }) => {
+import { cleanClassNames } from "@/utils/utils";
+
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className = "" }) => {
   useEffect(() => {
     // Disable background scrolling when modal is open  
     if (isOpen) {
@@ -22,11 +24,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className }) =
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+      className="overlay-modal fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
       onClick={onClose}
     >
       <div
-        className={`bg-white rounded-lg p-4 shadow-lg ${className} relative`}
+        className={cleanClassNames("modal-content bg-white rounded-lg p-xxsmall shadow-lg relative", className)}
         onClick={(e) => e.stopPropagation()}
       >
         <button
