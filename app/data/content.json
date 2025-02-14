@@ -51,6 +51,15 @@
       "text": "My GitHub repositories",
       "button_text": "Browse my GitHub",
       "button_link": "https://github.com/ChrisMuster"
+    },
+    "card_3": {
+      "image": "/images/LinkedIn-logo.png",
+      "imageAlt": "Chris Muster's LinkedIn site",
+      "subtitle": "Chris Muster's",
+      "title": "LinkedIn",
+      "text": "Go on, hit me up on LinkedIn!",
+      "button_text": "Hit me",
+      "button_link": "https://www.linkedin.com/in/chris-muster-832b57a1/"
     }
   },
   "contact": {

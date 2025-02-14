@@ -71,7 +71,7 @@ export default function Homepage() {
       <Section id="websites" spacing="none">
         <h2 className="text-4xl my-small text-center">{websites.title}</h2>
         <div className="w-full bg-white h-full">
-          <Grid gap="medium" sm={1} md={2} lg={3}>
+          <Grid gap="medium" sm={1} md={2} xl={3}>
             <Card
               imageSrc={websites.card_1.image}
               imageAlt={websites.card_1.imageAlt}
@@ -93,12 +93,13 @@ export default function Homepage() {
               shadow="light"
             />
             <Card
-              title="Card 3"
-              subtitle="Interactive Card"
-              text="This button runs a function instead of navigating."
-              buttonText="Click Me"
-              buttonLink=""
-              onClick={() => alert("Button clicked!")}
+              imageSrc={websites.card_3.image}
+              imageAlt={websites.card_3.imageAlt}
+              title={websites.card_3.title}
+              subtitle={websites.card_3.subtitle}
+              text={websites.card_3.text}
+              buttonText={websites.card_3.button_text}
+              buttonLink={websites.card_3.button_link}
               shadow="light"
             />
           </Grid>
