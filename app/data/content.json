@@ -1,8 +1,19 @@
 {
   "header": {
-    
+    "title": "Chris Muster",
+    "logo": "/images/logos/CM-logo-round.png",
+    "nav": [
+      "About",
+      "Code Challenges",
+      "Projects",
+      "Websites",
+      "Contact"
+    ]
   },
-  "footer": {},
+  "footer": {
+    "logo": "/images/logos/CM-full-logo.png",
+    "copyright": "Chris Muster. All rights reserved."
+  },
   "about": {
     "hero": {
       "image": "/images/chrismuster-hero.png",
