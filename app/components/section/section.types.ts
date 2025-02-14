@@ -5,5 +5,6 @@ export interface SectionProps {
   children: ReactNode;
   fullWidth?: boolean; // Optional prop to make the section full width
   className?: string; // Allow additional classes
-  spacing?: "none" | "small" | "medium" | "large";
+  spacing?: "none" | "xxsmall" | "xsmall" | "small" | "medium" | "large" | "xlarge" | "xxlarge";
+  bgColor?: string; // Optional prop for background color
 }

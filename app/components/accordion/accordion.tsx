@@ -24,7 +24,7 @@ export function AccordionTab({ title, children, openByDefault = false, className
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200 transition"
       >
-        <span className="text-gray-700 font-semibold">{title}</span>
+        <span className="font-semibold">{title}</span>
         <Image
           src="/images/icons/chevron-up.svg"
           alt="Chevron icon"

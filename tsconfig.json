@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "jsxImportSource": "react",
     "incremental": true,
     "plugins": [
       {
@@ -22,7 +23,11 @@
       "@/*": ["./*"],
       "@/components/*": ["./app/components/*"],
       "@/page-components/*": ["./app/page-components/*"],
-    }
+    },
+    "types": [
+      "react",
+      "react-dom"
+    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

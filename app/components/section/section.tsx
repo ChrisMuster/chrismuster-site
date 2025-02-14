@@ -1,5 +1,3 @@
-"use client";
-
 import { SectionProps } from "@/components/section/section.types";
 
 export default function Section({ 
@@ -7,13 +5,14 @@ export default function Section({
   children, 
   fullWidth = false, 
   className = "", 
-  spacing = "medium", // Default spacing is "medium" 
+  spacing = "medium", // Default spacing is "medium" and applies to margin-bottom
+  bgColor,
 }: SectionProps) {
   return (
     <section
       id={id}
-      className={`h-screen flex flex-col items-center justify-center ${fullWidth ? "w-full" : "px-6 md:px-12 lg:px-24 xl:px-32"
-        } mb-${spacing} ${className}`}
+      className={`h-auto min-h-screen flex flex-col ${fullWidth ? "w-full" : "p-xsmall md:p-medium lg:p-xlarge xl:p-xxlarge"
+        } mb-${spacing} ${bgColor ? bgColor : ""} ${className}`}
     >
       {children}
     </section>

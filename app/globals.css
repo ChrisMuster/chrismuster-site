@@ -3,17 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFF;
+  --foreground: var(--color-primary);
+  --color-primary: #374151;
   --color-blue: #3533CC;
+  --color-gold: #A68B2C;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    --background: #000;
+    --foreground: #fff; */
+    /* --shadow-light: 0px 12px 36px rgba(0, 0, 0, 0.18);
+    --shadow-dark: 0px 12px 36px rgba(255, 255, 255, 0.06); */
+  /* }
+} */
 
 body {
   color: var(--foreground);
@@ -26,87 +30,25 @@ html {
   scroll-padding-top: 5rem;
 }
 
-/* Custom margin spacing utilities */
-/* Custom margin-bottom spacing */
-.mb-none { margin-bottom: 0px; }
-.mb-small { margin-bottom: 2rem; }
-.mb-medium { margin-bottom: 4rem; }
-.mb-large { margin-bottom: 6rem; }
+/* Custom box shadows */
+.shadow-light {
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+  /* Shadow that works on a light background */
+}
 
-/* Custom margin-top spacing */
-.mt-none { margin-top: 0px; }
-.mt-small { margin-top: 2rem; }
-.mt-medium { margin-top: 4rem; }
-.mt-large { margin-top: 6rem; }
+.shadow-dark {
+  box-shadow: 0px 6px 14px rgba(255, 255, 255, 0.15);
+  /* Shadow that works on a dark background */
+}
 
-/* Custom margin-left spacing */
-.ml-none { margin-left: 0px; }
-.ml-small { margin-left: 2rem; }
-.ml-medium { margin-left: 4rem; }
-.ml-large { margin-left: 6rem; }
-
-/* Custom margin-right spacing */
-.mr-none { margin-right: 0px; }
-.mr-small { margin-right: 2rem; }
-.mr-medium { margin-right: 4rem; }
-.mr-large { margin-right: 6rem; }
-
-/* Custom horizontal margin (left & right) */
-.mx-none { margin-left: 0px; margin-right: 0px; }
-.mx-small { margin-left: 2rem; margin-right: 2rem; }
-.mx-medium { margin-left: 4rem; margin-right: 4rem; }
-.mx-large { margin-left: 6rem; margin-right: 6rem; }
-
-/* Custom vertical margin (top & bottom) */
-.my-none { margin-top: 0px; margin-bottom: 0px; }
-.my-small { margin-top: 2rem; margin-bottom: 2rem; }
-.my-medium { margin-top: 4rem; margin-bottom: 4rem; }
-.my-large { margin-top: 6rem; margin-bottom: 6rem; }
-
-/* Custom overall margin (all sides) */
-.m-none { margin: 0px; }
-.m-small { margin: 2rem; }
-.m-medium { margin: 4rem; }
-.m-large { margin: 6rem; }
-
-/* Custom padding-top spacing */
-.pt-none { padding-top: 0px; }
-.pt-small { padding-top: 2rem; }
-.pt-medium { padding-top: 4rem; }
-.pt-large { padding-top: 6rem; }
-
-/* Custom padding-bottom spacing */
-.pb-none { padding-bottom: 0px; }
-.pb-small { padding-bottom: 2rem; }
-.pb-medium { padding-bottom: 4rem; }
-.pb-large { padding-bottom: 6rem; }
-
-/* Custom padding-left spacing */
-.pl-none { padding-left: 0px; }
-.pl-small { padding-left: 2rem; }
-.pl-medium { padding-left: 4rem; }
-.pl-large { padding-left: 6rem; }
-
-/* Custom padding-right spacing */
-.pr-none { padding-right: 0px; }
-.pr-small { padding-right: 2rem; }
-.pr-medium { padding-right: 4rem; }
-.pr-large { padding-right: 6rem; }
-
-/* Custom horizontal padding (left & right) */
-.px-none { padding-left: 0px; padding-right: 0px; }
-.px-small { padding-left: 2rem; padding-right: 2rem; }
-.px-medium { padding-left: 4rem; padding-right: 4rem; }
-.px-large { padding-left: 6rem; padding-right: 6rem; }
-
-/* Custom vertical padding (top & bottom) */
-.py-none { padding-top: 0px; padding-bottom: 0px; }
-.py-small { padding-top: 2rem; padding-bottom: 2rem; }
-.py-medium { padding-top: 4rem; padding-bottom: 4rem; }
-.py-large { padding-top: 6rem; padding-bottom: 6rem; }
-
-/* Custom overall padding (all sides) */
-.p-none { padding: 0px; }
-.p-small { padding: 2rem; }
-.p-medium { padding: 4rem; }
-.p-large { padding: 6rem; }
+/* ignore css error warnings for this, as tailwind knows
+ to only apply the necessary styles and not all of them at once*/
+@layer utilities {
+  .force-tailwind-grid {
+    @apply grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4 grid-cols-5 grid-cols-6;
+    @apply sm:grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 sm:grid-cols-4 sm:grid-cols-5 sm:grid-cols-6;
+    @apply md:grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4 md:grid-cols-5 md:grid-cols-6;
+    @apply lg:grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 lg:grid-cols-5 lg:grid-cols-6;
+    @apply xl:grid-cols-1 xl:grid-cols-2 xl:grid-cols-3 xl:grid-cols-4 xl:grid-cols-5 xl:grid-cols-6;
+  }
+}

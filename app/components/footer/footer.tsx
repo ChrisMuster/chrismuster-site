@@ -14,10 +14,6 @@ export default function Footer() {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className="bg-gray-900 text-white text-center py-6">
       <div className="container mx-auto flex flex-col items-center">
@@ -28,14 +24,6 @@ export default function Footer() {
           className="w-auto h-auto max-w-[200px]"
           width={200} 
           height={200} />
-
-        {/* Back to Top Button */}
-        <button
-          onClick={scrollToTop}
-          className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 transition rounded text-white"
-        >
-          Back to Top
-        </button>
 
         {/* Copyright Message */}
         <p className="mt-4 text-sm">
