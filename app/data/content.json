@@ -63,6 +63,20 @@
     }
   },
   "contact": {
-    "title": "Contact"
+    "title": "Contact",
+    "tabs": [
+      { 
+        "id": "tab1", 
+        "label": "Tab One"
+      },
+      { 
+        "id": "tab2", 
+        "label": "Tab Two"
+      },
+      { 
+        "id": "tab3", 
+        "label": "Tab Three"
+      }
+    ]
   }
 }

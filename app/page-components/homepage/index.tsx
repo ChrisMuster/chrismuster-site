@@ -9,12 +9,15 @@ import RPSLSGame from '@/components/RPSLSGame/RPSLSGame';
 import Modal from '@/components/modal/modal';
 import Card from '@/components/card/card';
 import Grid from '@/components/grid/grid';
+import TabsSection from "@/components/tabs/tabsSection";
 
 import content from "@/app/data/content.json";
 import { scrollToSection } from "@/utils/utils";
 
 export default function Homepage() {
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const [activeTab, setActiveTab] = useState("tab1");
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
@@ -108,7 +111,13 @@ export default function Homepage() {
 
       <Section id="contact">
         <h2 className="text-4xl my-small text-center">{contact.title}</h2>
-        <div className="w-full bg-white h-full">Test div</div>
+        <div className="p-medium">
+          <TabsSection tabs={contact.tabs} activeTab={activeTab} onTabChange={setActiveTab}>
+            {activeTab === "tab1" && <p>Content for Tab One</p>}
+            {activeTab === "tab2" && <p>Content for Tab Two</p>}
+            {activeTab === "tab3" && <p>Content for Tab Three</p>}
+          </TabsSection>
+        </div>
       </Section>
     </>
   );
