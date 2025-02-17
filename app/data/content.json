@@ -63,6 +63,32 @@
     }
   },
   "contact": {
-    "title": "Contact"
+    "title": "Contact",
+    "tabs": [
+      { 
+        "id": "tab1", 
+        "label": "Tab One"
+      },
+      { 
+        "id": "tab2", 
+        "label": "Chris Muster's CV"
+      },
+      { 
+        "id": "tab3", 
+        "label": "Tab Three"
+      }
+    ],
+    "tabs_content": {
+      "tab_1": {
+        "title": ""
+      },
+      "tab_2": {
+        "title": "Latest CV",
+        "pdf_file_url": "/documents/Chris-CV-Feb2025.pdf"
+      },
+      "tab_3": {
+        "title": ""
+      }
+    }
   }
 }
