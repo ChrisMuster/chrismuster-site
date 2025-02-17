@@ -11,6 +11,7 @@ import Card from '@/components/card/card';
 import Grid from '@/components/grid/grid';
 import TabsSection from "@/components/tabs/tabsSection";
 import PdfViewer from "@/components/pdf-viewer/pdfViewer";
+import Divider from "@/components/ui/divider";
 
 import content from "@/app/data/content.json";
 import { scrollToSection } from "@/utils/utils";
@@ -46,6 +47,8 @@ export default function Homepage() {
         </div>
       </Section>
 
+      <Divider height="h-2" />
+
       <Section id="code-challenges" bgColor="bg-[gray]">
         <h2 className="text-4xl my-small text-center">{code_challenges.title}</h2>
         <div className="w-full bg-white h-auto">
@@ -56,6 +59,8 @@ export default function Homepage() {
           </Accordion>
         </div>
       </Section>
+
+      <Divider height="h-2" />
 
       <Section id="projects">
         <h2 className="text-4xl my-small text-center">{projects.title}</h2>
@@ -71,6 +76,8 @@ export default function Homepage() {
           </Modal>
         </div>
       </Section>
+
+      <Divider height="h-2" />
 
       <Section id="websites">
         <h2 className="text-4xl my-small text-center">{websites.title}</h2>
@@ -109,6 +116,8 @@ export default function Homepage() {
           </Grid>
         </div>
       </Section>
+
+      <Divider height="h-2" />
 
       <Section id="contact">
         <h2 className="text-4xl my-small text-center">{contact.title}</h2>
