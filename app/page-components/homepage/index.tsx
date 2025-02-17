@@ -10,6 +10,7 @@ import Modal from '@/components/modal/modal';
 import Card from '@/components/card/card';
 import Grid from '@/components/grid/grid';
 import TabsSection from "@/components/tabs/tabsSection";
+import PdfViewer from "@/components/pdf-viewer/pdfViewer";
 
 import content from "@/app/data/content.json";
 import { scrollToSection } from "@/utils/utils";
@@ -114,7 +115,12 @@ export default function Homepage() {
         <div className="p-medium">
           <TabsSection tabs={contact.tabs} activeTab={activeTab} onTabChange={setActiveTab}>
             {activeTab === "tab1" && <p>Content for Tab One</p>}
-            {activeTab === "tab2" && <p>Content for Tab Two</p>}
+            {activeTab === "tab2" && (
+              <div className="p-medium">
+                <h1 className="text-3xl text-center font-bold mb-medium">{contact.tabs_content.tab_2.title}</h1>
+                <PdfViewer fileUrl={contact.tabs_content.tab_2.pdf_file_url} />
+              </div>
+            )}
             {activeTab === "tab3" && <p>Content for Tab Three</p>}
           </TabsSection>
         </div>
