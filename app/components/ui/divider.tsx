@@ -10,7 +10,7 @@ const Divider: React.FC<DividerProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`${paddingX} ${margin}`}>
+    <div className={`w-full ${paddingX} ${margin} flex justify-center`}>
       <div className={`${width} ${height} ${color} ${className}`} />
     </div>
   );
