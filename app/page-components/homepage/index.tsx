@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
+import Link from "next/link"
 
 import Section from "@/components/section/section";
 import Hero from "@/components/hero/hero";
 import { Accordion, AccordionTab } from "@/components/accordion/accordion";
-import RPSLSGame from '@/components/RPSLSGame/RPSLSGame';
-import Modal from '@/components/modal/modal';
-import Card from '@/components/card/card';
-import Grid from '@/components/grid/grid';
+import RPSLSGame from "@/components/RPSLSGame/RPSLSGame";
+import Modal from "@/components/modal/modal";
+import Card from "@/components/card/card";
+import Grid from "@/components/grid/grid";
 import TabsSection from "@/components/tabs/tabsSection";
 import PdfViewer from "@/components/pdf-viewer/pdfViewer";
 import Divider from "@/components/ui/divider";
@@ -24,6 +25,11 @@ export default function Homepage() {
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
+
+  const handleModalLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault(); // Stop the link navigation
+      handleOpenModal(); // Execute the provided function
+  }
 
   const { about, code_challenges, projects, websites, contact } = content;
 
@@ -67,21 +73,39 @@ export default function Homepage() {
         <h2 className="text-4xl my-small text-center">{projects.title}</h2>
         <div className="w-full bg-white h-full">
           <div className="p-small max-w-5xl mx-auto">
-            <h1 className="text-3xl mb-xsmall text-center">Gallery Carousel Example</h1>
-            <GalleryCarousel images={content.projects.gallery.images} />
+            <h1 className="text-3xl mb-xsmall text-center">{projects.gallery.title}</h1>
+            <GalleryCarousel images={projects.gallery.images} />
           </div>
 
-          <Divider width="w-xs" height="h-2" />
+          <Divider width="w-xs" height="h-1" />
 
           <div className="p-small max-w-5xl mx-auto flex flex-col justify-center">
-            <h1 className="text-3xl mb-xsmall text-center">Modal Popup Example</h1>
-            <button onClick={handleOpenModal} className="px-xxsmall py-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded">
-              Open Modal
-            </button>
+            <h1 className="text-3xl mb-xsmall text-center">{projects.modals.title}</h1>
+
+            <div className="flex flex-col md:flex-row justify-around">
+              <div className="flex flex-col">
+                <p className="mb-xxsmall">{projects.modals.button_label}</p>
+                <button onClick={handleOpenModal} className="w-fit mb-small px-xxsmall py-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded">
+                  {projects.modals.button_text}
+                </button>
+              </div>
+              <div className="w-fit h-fit">
+                <Link
+                  href="#"
+                  onClick={handleModalLinkClick}
+                  className="font-bold hover:text-[var(--color-blue)] cursor-pointer"
+                >
+                  {projects.modals.link_text}
+                </Link>
+              </div>
+            </div>
+
             <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
               <div className="w-full max-w-[500px] p-xxsmall">
-                <h2 className="text-lg font-bold">Modal Title</h2>
-                <p>This is the content of the modal.</p>
+                <h2 className="text-lg font-bold">{projects.modals.modal_title}</h2>
+                <p>{projects.modals.modal_text_1}</p>
+                <p>{projects.modals.modal_text_2}</p>
+                <p>{projects.modals.modal_text_3}</p>
               </div>
             </Modal>
           </div>
