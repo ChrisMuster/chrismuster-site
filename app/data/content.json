@@ -30,7 +30,72 @@
     "title": "Code Challenges"
   },
   "projects": {
-    "title": "Projects"
+    "title": "Projects",
+    "gallery": {
+      "title": "Gallery Carousel Example",
+      "images": [
+        {
+          "src": "/images/gallery/eiffel-tower.jpg",
+          "alt": "Eiffel Tower",
+          "title": "Eiffel Tower"
+        },
+        {
+          "src": "/images/gallery/statue-capri.jpg",
+          "alt": "Statue on Capri",
+          "title": "A view with a statue from the top of the mountain on the island of Capri"
+        },
+        {
+          "src": "/images/gallery/ship-monemvasia.jpg",
+          "alt": "Ship off of Monemvasia",
+          "title": "Cruise ship off of Monemvasia"
+        },
+        {
+          "src": "/images/gallery/stained-glass.jpg",
+          "alt": "Stained Glass",
+          "title": "Stained Glass"
+        },
+        {
+          "src": "/images/gallery/royal-barge.jpg",
+          "alt": "Royal barge",
+          "title": "Royal barge"
+        },
+        {
+          "src": "/images/gallery/gold-angel.jpg",
+          "alt": "Small gold statue of an Angel",
+          "title": "Small gold statue of an Angel held by larger statue"
+        },
+        {
+          "src": "/images/gallery/gargoyles.jpg",
+          "alt": "Gargoyles",
+          "title": "Gargoyles"
+        },
+        {
+          "src": "/images/gallery/bridge-amsterdam.jpg",
+          "alt": "Bridge in Amsterdam at night",
+          "title": "Bridge in Amsterdam at night"
+        },
+        {
+          "src": "/images/gallery/blue-moon.jpg",
+          "alt": "The Moon",
+          "title": "The Moon"
+        },
+        {
+          "src": "/images/gallery/Black-and-White-and-Yellow.jpg",
+          "alt": "Buda Castle Tunnel with taxi",
+          "title": "Buda Castle Tunnel with taxi"
+        }
+      ]
+    },
+    "modals": {
+      "title": "Modal Popup Examples",
+      "button_label": "Open a modal popup via button:",
+      "button_text": "Open Modal",
+      "link_text": "Open a modal popup via clicking a link",
+      "modal_title": "Modal Title",
+      "modal_text_1": "The modal can be opened via both button and link, or potentially anything with a click handler.",
+      "modal_text_2": "This simple modal popup can contain other components, bespoke code, etc. This means it can also be used by other components, such as the Gallery Carousel, as it allows anything to be put inside it. The content of the modal determines its size.",
+      "modal_text_3": "It can be closed both with the cancel \"x\" button and by clicking anywhere on the screen off of the popup."
+    }
   },
   "websites": {
     "title": "Websites",
