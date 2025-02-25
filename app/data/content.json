@@ -30,7 +30,61 @@
     "title": "Code Challenges"
   },
   "projects": {
-    "title": "Projects"
+    "title": "Projects",
+    "gallery": {
+      "images": [
+        {
+          "src": "/images/gallery/eiffel-tower.jpg",
+          "alt": "Eiffel Tower",
+          "title": "Eiffel Tower"
+        },
+        {
+          "src": "/images/gallery/statue-capri.jpg",
+          "alt": "Statue on Capri",
+          "title": "A view with a statue from the top of the mountain on the island of Capri"
+        },
+        {
+          "src": "/images/gallery/ship-monemvasia.jpg",
+          "alt": "Ship off of Monemvasia",
+          "title": "Cruise ship off of Monemvasia"
+        },
+        {
+          "src": "/images/gallery/stained-glass.jpg",
+          "alt": "Stained Glass",
+          "title": "Stained Glass"
+        },
+        {
+          "src": "/images/gallery/royal-barge.jpg",
+          "alt": "Royal barge",
+          "title": "Royal barge"
+        },
+        {
+          "src": "/images/gallery/gold-angel.jpg",
+          "alt": "Small gold statue of an Angel",
+          "title": "Small gold statue of an Angel held by larger statue"
+        },
+        {
+          "src": "/images/gallery/gargoyles.jpg",
+          "alt": "Gargoyles",
+          "title": "Gargoyles"
+        },
+        {
+          "src": "/images/gallery/bridge-amsterdam.jpg",
+          "alt": "Bridge in Amsterdam at night",
+          "title": "Bridge in Amsterdam at night"
+        },
+        {
+          "src": "/images/gallery/blue-moon.jpg",
+          "alt": "The Moon",
+          "title": "The Moon"
+        },
+        {
+          "src": "/images/gallery/Black-and-White-and-Yellow.jpg",
+          "alt": "Buda Castle Tunnel with taxi",
+          "title": "Buda Castle Tunnel with taxi"
+        }
+      ]
+    }
   },
   "websites": {
     "title": "Websites",

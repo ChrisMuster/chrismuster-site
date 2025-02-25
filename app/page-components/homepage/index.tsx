@@ -12,6 +12,7 @@ import Grid from '@/components/grid/grid';
 import TabsSection from "@/components/tabs/tabsSection";
 import PdfViewer from "@/components/pdf-viewer/pdfViewer";
 import Divider from "@/components/ui/divider";
+import GalleryCarousel from "@/components/gallery-carousel/gallery-carousel";
 
 import content from "@/app/data/content.json";
 import { scrollToSection } from "@/utils/utils";
@@ -65,15 +66,25 @@ export default function Homepage() {
       <Section id="projects">
         <h2 className="text-4xl my-small text-center">{projects.title}</h2>
         <div className="w-full bg-white h-full">
-          <button onClick={handleOpenModal} className="px-xxsmall py-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded">
-            Open Modal
-          </button>
-          <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-            <div className="w-full max-w-[500px] p-xxsmall">
-              <h2 className="text-lg font-bold">Modal Title</h2>
-              <p>This is the content of the modal.</p>
-            </div>
-          </Modal>
+          <div className="p-small max-w-5xl mx-auto">
+            <h1 className="text-3xl mb-xsmall text-center">Gallery Carousel Example</h1>
+            <GalleryCarousel images={content.projects.gallery.images} />
+          </div>
+
+          <Divider width="w-xs" height="h-2" />
+
+          <div className="p-small max-w-5xl mx-auto flex flex-col justify-center">
+            <h1 className="text-3xl mb-xsmall text-center">Modal Popup Example</h1>
+            <button onClick={handleOpenModal} className="px-xxsmall py-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded">
+              Open Modal
+            </button>
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+              <div className="w-full max-w-[500px] p-xxsmall">
+                <h2 className="text-lg font-bold">Modal Title</h2>
+                <p>This is the content of the modal.</p>
+              </div>
+            </Modal>
+          </div>
         </div>
       </Section>
 
