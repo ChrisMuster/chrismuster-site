@@ -146,7 +146,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             />
 
             {/* Expand Icon (Visible Only When Hovering) */}
-            {isHovering && (
+            {(isHovering || visibleThumbnails === 3) && (
               <button
                 className="absolute top-2 right-2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white transition-opacity"
                 onClick={openModal}
