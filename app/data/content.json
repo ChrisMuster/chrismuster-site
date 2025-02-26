@@ -132,11 +132,11 @@
     "tabs": [
       { 
         "id": "tab1", 
-        "label": "Tab One"
+        "label": "My CV"
       },
       { 
         "id": "tab2", 
-        "label": "Chris Muster's CV"
+        "label": "Tab Two"
       },
       { 
         "id": "tab3", 
@@ -145,14 +145,16 @@
     ],
     "tabs_content": {
       "tab_1": {
-        "title": ""
-      },
-      "tab_2": {
-        "title": "Latest CV",
+        "title": "",
         "pdf_file_url": "/documents/Chris-CV-Feb2025.pdf"
       },
+      "tab_2": {
+        "title": "",
+        "text": "Content for Tab Two"
+      },
       "tab_3": {
-        "title": ""
+        "title": "",
+        "text": "Content for Tab Three"
       }
     }
   }
