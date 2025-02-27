@@ -8,7 +8,7 @@ export default function TabsSection({ tabs, activeTab, onTabChange, children }: 
       <Tabs tabs={tabs} activeTab={activeTab} onTabChange={onTabChange} />
 
       {/* Content Section */}
-      <div className="tab-section bg-white p-medium border border-gray-300 relative z-10">
+      <div className="tab-section bg-white p-0 border border-gray-300 relative z-10">
         {children}
       </div>
     </div>

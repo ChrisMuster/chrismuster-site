@@ -6,7 +6,7 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          className={`relative px-xsmall py-3 text-lg font-semibold transition-colors duration-200 
+          className={`relative px-xxsmall sm:px-xsmall py-3 sm:text-lg font-semibold transition-colors duration-200 
             ${activeTab === tab.id
             ? "border border-gray-300 border-b-white bg-white text-[var(--color-primary)] z-20"
             : "border-transparent text-[var(--color-primary)] hover:bg-gray-100 z-10"

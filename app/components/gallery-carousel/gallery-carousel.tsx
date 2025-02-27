@@ -133,7 +133,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             {...bindDragSwipe()}
             ref={mainImageRef}
             className="relative w-full max-w-[800px] h-auto aspect-[4/3] flex justify-center items-center overflow-hidden" 
-            style={{ touchAction: "none", userSelect: "none", pointerEvents: "auto" }}
+            style={{ userSelect: "none", pointerEvents: "auto" }}
           >
             <Image
               src={images[currentIndex].src}
@@ -268,7 +268,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             <button
               key={index}
               onClick={() => updateIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? "w-4 h-4 bg-[var(--color-blue)]" : "bg-gray-400"}`}
+              className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? "w-4 h-3 bg-[var(--color-blue)]" : "bg-gray-400"}`}
             />
           ))}
         </div>
