@@ -24,7 +24,9 @@
     "title": "About Me",
     "text_1": "I’m a front-end developer with several years of experience in web development, passionate about creating user-friendly and engaging web applications. I love diving into JavaScript, CSS, and frameworks like React and Next.js to bring innovative ideas to life. Recently, I’ve been focused on rebuilding websites and optimising performance, where I design reusable components and integrate APIs for enhanced user experiences.",
     "text_2": "When I’m not coding, you can often find me absorbed in a good book, solving puzzles, or planning my next travel adventure. I value curiosity and diligence in both my work and personal life, always seeking opportunities to learn and grow in the tech world.",
-    "button_text": "Get in touch"
+    "button_text": "Get in touch",
+    "content_img": "/images/Coder.png",
+    "content_alt_text": ""
   },
   "code_challenges": {
     "title": "Code Challenges"
