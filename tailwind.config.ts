@@ -19,6 +19,7 @@ export default {
         md: "768px",  // Medium screen (tablet)
         lg: "1024px", // Large screen (desktop)
         xl: "1280px", // Extra large screen
+        xxl: "1600px", // Extra extra large screen
       },
       padding: {
         none: "0px", // Custom class for no padding

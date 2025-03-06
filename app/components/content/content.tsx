@@ -42,24 +42,24 @@ export default function Content({
       )}
     >
       {/* Text Section */}
-      <div className={cleanClassNames("content-text w-full flex-1", leftWidth)}>
+      <div className={cleanClassNames("content-text w-full flex-auto lg:flex-none", leftWidth)}>
         {children}
       </div>
 
       {/* Image Section */}
       <div
         className={cleanClassNames(
-          "content-img w-full order-first lg:order-none relative flex-1 min-h-[250px] lg:min-h-0",
+          "content-img w-full order-first lg:order-none relative lg:flex-none min-h-[250px] lg:min-h-0",
           rightWidth
         )}
       >
         {useBackgroundImage ? (
           <div
-            className="w-full h-full bg-cover bg-center min-h-[250px] lg:min-h-0"
+            className="w-full h-full bg-cover xxl:bg-contain xxl:bg-no-repeat bg-center min-h-[250px] lg:min-h-0"
             style={{ backgroundImage: `url(${imageSrc})` }}
           />
         ) : (
-          <div className="relative w-full h-full">
+            <div className="relative w-full h-full min-h-[250px] lg:min-h-0">
             <Image
               src={imageSrc}
               alt={imageAlt}

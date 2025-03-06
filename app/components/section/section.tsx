@@ -25,7 +25,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className={cleanClassNames("h-auto min-h-screen flex flex-col", fullWidth ? "w-full" : "p-xsmall md:p-medium lg:px-xlarge xl:px-xxlarge", mbSpacingClasses[spacing], bgColor ? bgColor : "", className)}
+      className={cleanClassNames("h-auto min-h-screen flex flex-col", fullWidth ? "w-full" : "p-xsmall md:p-medium lg:px-xlarge xl:px-xxlarge xxl:max-w-[1425px] xxl:mx-auto", mbSpacingClasses[spacing], bgColor ? bgColor : "", className)}
     >
       {children}
     </section>

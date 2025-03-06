@@ -41,7 +41,7 @@ export default function Hero({
         {/* Overlay Content (Desktop) */}
         <div
           className={cleanClassNames(
-            "absolute inset-0 flex h-full items-center lg:px-xlarge xl:px-xxlarge",
+            "absolute inset-0 flex h-full items-center lg:px-xlarge xl:px-xxlarge xxl:max-w-[1425px] xxl:mx-auto",
             overlayAlignmentClasses[overlayAlignment]
           )}
         >

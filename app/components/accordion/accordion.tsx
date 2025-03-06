@@ -20,11 +20,11 @@ export function AccordionTab({ title, children, openByDefault = false, className
   const [isOpen, setIsOpen] = useState(openByDefault);
 
   return (
-    <div className={cleanClassNames("accordion-tab border-b border-gray-300", className)}>
+    <div className={cleanClassNames("accordion-tab border-b border-gray-400", className)}>
       {/* Tab Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="accordion-tab-btn w-full flex justify-between items-center p-xxsmall bg-gray-100 hover:bg-gray-200 transition"
+        className="accordion-tab-btn w-full flex justify-between items-center p-xxsmall bg-gray-200 hover:bg-gray-300 transition"
       >
         <span className="font-semibold">{title}</span>
         <Image
@@ -38,7 +38,7 @@ export function AccordionTab({ title, children, openByDefault = false, className
 
       {/* Tab Content */}
       <div
-        className={`accordion-tab-content overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[1000px] p-xxsmall" : "max-h-0 p-none"
+        className={`accordion-tab-content overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[1000px] p-xxsmall border border-gray-200" : "max-h-0 p-none"
           }`}
       >
         {children}
