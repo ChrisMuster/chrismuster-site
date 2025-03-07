@@ -9,7 +9,7 @@ export default function CodeChallenges() {
   const { code_challenges } = content;
 
   return (
-    <Section id="code-challenges" bgColor="bg-[gray]">
+    <Section id="code-challenges">
       <h2 className="text-4xl my-small text-center">{code_challenges.title}</h2>
       <div className="w-full bg-white h-auto">
         <Accordion>
