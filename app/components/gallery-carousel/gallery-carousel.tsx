@@ -119,6 +119,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
         <button
           onClick={showPrevImage}
           className="hidden md:block hover:text-[var(--color-blue)] transition-colors"
+          title="Previous"
         >
           <ChevronLeft size={40} />
         </button>
@@ -160,6 +161,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
         <button
           onClick={showNextImage}
           className="hidden md:block hover:text-[var(--color-blue)] transition-colors"
+          title="Next"
         >
           <ChevronRight size={40} />
         </button>
@@ -176,6 +178,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           onClick={() => scrollThumbnails("left")}
           disabled={scrollIndex === 0}
           className="hover:text-[var(--color-blue)] transition-colors disabled:opacity-50"
+          title="Previous"
         >
           <ChevronLeft size={32} />
         </button>
@@ -219,6 +222,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           onClick={() => scrollThumbnails("right")}
           disabled={scrollIndex >= images.length - visibleThumbnails}
           className="hover:text-[var(--color-blue)] transition-colors disabled:opacity-50"
+          title="Next"
         >
           <ChevronRight size={32} />
         </button>
@@ -238,6 +242,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
               showPrevImage();
             }}
             className="absolute left-2 top-1/2 -translate-y-1/2 hover:text-[var(--color-blue)] transition-colors hidden md:block z-50"
+            title="Previous"
           >
             <ChevronLeft size={40} />
           </button>
@@ -258,6 +263,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
               showNextImage();
             }}
             className="absolute right-2 top-1/2 -translate-y-1/2 hover:text-[var(--color-blue)] transition-colors hidden md:block z-50"
+            title="Next"
           >
             <ChevronRight size={40} />
           </button>

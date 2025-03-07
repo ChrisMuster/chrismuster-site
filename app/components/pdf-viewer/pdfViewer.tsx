@@ -138,7 +138,7 @@ export default function PdfViewer({ fileUrl, border = false, shadow = false }: P
 
         {/* Download & Print Buttons */}
         <div className="flex sm:gap-2 gap-1">
-          <a href={fileUrl} download className="sm:px-3 sm:py-2 p-2 bg-green-600 hover:bg-green-900 text-white rounded-md flex items-center gap-1" title="Download">
+          <a href={fileUrl} download className="sm:px-3 sm:py-2 p-2 bg-green-700 hover:bg-green-900 text-white rounded-md flex items-center gap-1" title="Download">
             <Download className="w-5 h-5" /> <span className="hidden md:inline">Download</span>
           </a>
 
