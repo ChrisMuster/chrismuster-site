@@ -54,7 +54,7 @@ export default function Card({
             onClick={handleClick}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-[var(--color-blue)] hover:bg-blue-900 text-white px-xxsmall py-2 rounded-md hover:bg-opacity-80 transition cursor-pointer"
+            className="inline-block bg-[var(--color-blue)] hover:bg-blue-900 text-white px-xxsmall py-2 rounded-md transition cursor-pointer"
           >
             {buttonText}
           </Link>

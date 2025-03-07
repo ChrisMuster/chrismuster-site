@@ -151,6 +151,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
               <button
                 className="absolute top-2 right-2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white transition-opacity"
                 onClick={openModal}
+                title="Expand Image"
               >
                 <Expand size={24} />
               </button>
@@ -270,11 +271,12 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
         </div>
         {/* Dot Navigation */}
         <div className="flex justify-center mt-xxsmall space-x-2 pb-xxsmall">
-          {images.map((_, index) => (
+          {images.map((image, index) => (
             <button
               key={index}
               onClick={() => updateIndex(index)}
               className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? "w-4 h-3 bg-[var(--color-blue)]" : "bg-gray-400"}`}
+              title={image.title || ""}
             />
           ))}
         </div>
