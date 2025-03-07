@@ -28,7 +28,7 @@ export default function Hero({
   return (
     <>
       <div className={cleanClassNames("hero w-full h-[66vh] relative", className)}>
-        {/* Background Image */}
+        {/* Hero Image */}
         <Image
           src={image}
           alt={imageAlt}
