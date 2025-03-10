@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Theme } from "@/components/theme-toggle/theme-toggle.types";
+import { ThemeToggleButton } from "@/components/toggle/toggle";
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("light");
@@ -26,12 +27,6 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button
-      onClick={toggleTheme}
-      className="p-2 bg-gray-500 hover:bg-gray-300 dark:bg-[var(--color-blue)] dark:hover:bg-blue-900 text-white rounded"
-      aria-label="Toggle Dark Mode"
-    >
-      {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
-    </button>
+    <ThemeToggleButton checked={theme === "dark"} onChange={toggleTheme} />
   );
 }
