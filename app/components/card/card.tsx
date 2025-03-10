@@ -27,7 +27,7 @@ export default function Card({
   const shadowClass = shadow === "light" ? "shadow-light" : shadow === "dark" ? "shadow-dark" : "";
 
   return (
-    <div className={cleanClassNames("card w-full bg-[var(--background)] rounded-lg transition flex flex-col h-full", shadowClass, className)}>
+    <div className={cleanClassNames("card w-full bg-white text-[var(--color-primary)] rounded-lg transition flex flex-col h-full", shadowClass, className)}>
       {/* Image */}
       <div className="w-full h-[220px] rounded-t-lg relative">
         <Image

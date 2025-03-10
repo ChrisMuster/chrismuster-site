@@ -5,6 +5,7 @@ import { useState } from "react";
 import Section from "@/components/section/section";
 import TabsSection from "@/components/tabs/tabsSection";
 import PdfViewer from "@/components/pdf-viewer/pdfViewer";
+import EmailForm from "@/components/email/email-form";
 
 import content from "@/app/data/content.json";
 
@@ -18,6 +19,7 @@ export default function Contact() {
   const pdfFile_url = contact.tabs_content.tab_1.pdf_file_url;
 
   // Tab 2
+  const tab2_title = contact.tabs_content.tab_2.title;
   const tab2_text = contact.tabs_content.tab_2.text;
 
   // Tab 3
@@ -36,8 +38,18 @@ export default function Contact() {
               <PdfViewer fileUrl={pdfFile_url} />
             </div>
           )}
-          {activeTab === "tab2" && <div className="p-small"><p>{tab2_text}</p></div>}
-          {activeTab === "tab3" && <div className="p-small"><p>{tab3_text}</p></div>}
+          {activeTab === "tab2" && (
+            <div className="flex flex-col max-w-5xl p-xsmall mx-auto my-xsmall items-center">
+              <h1 className="text-3xl font-bold mx-auto mb-xxsmall">{tab2_title}</h1>
+              <p className="mb-xxsmall">
+                {tab2_text}
+              </p>
+              <EmailForm />
+            </div>
+          )}
+          {activeTab === "tab3" && (
+            <div className="p-small"><p>{tab3_text}</p></div>
+          )}
         </TabsSection>
       </div>
     </Section>

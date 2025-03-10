@@ -138,7 +138,7 @@
       },
       { 
         "id": "tab2", 
-        "label": "Tab Two"
+        "label": "Email"
       },
       { 
         "id": "tab3", 
@@ -151,8 +151,8 @@
         "pdf_file_url": "/documents/Chris-CV-Feb2025.pdf"
       },
       "tab_2": {
-        "title": "",
-        "text": "Content for Tab Two"
+        "title": "Email me!",
+        "text": "Fill out the form below."
       },
       "tab_3": {
         "title": "",

@@ -8,26 +8,30 @@
   --color-primary: #374151;
   --color-blue: #3533CC;
   --color-gold: #A68B2C;
+  --divider: var(--color-primary);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000;
-    --foreground: #fff; */
-    /* --shadow-light: 0px 12px 36px rgba(0, 0, 0, 0.18);
-    --shadow-dark: 0px 12px 36px rgba(255, 255, 255, 0.06); */
-  /* }
-} */
+.dark {
+  --background: var(--color-primary);
+  --foreground: #fff;
+  --color-primary: #374151;
+  --divider: #fff;
+}
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-roboto), Arial,
+    Helvetica, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+}
+
+.test {
+  color:#fcebeb
 }
 
 /* Custom box shadows */

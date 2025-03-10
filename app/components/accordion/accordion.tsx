@@ -20,11 +20,11 @@ export function AccordionTab({ title, children, openByDefault = false, className
   const [isOpen, setIsOpen] = useState(openByDefault);
 
   return (
-    <div className={cleanClassNames("accordion-tab border-b border-gray-400", className)}>
+    <div className={cleanClassNames("accordion-tab mb-4", className)}>
       {/* Tab Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="accordion-tab-btn w-full flex justify-between items-center p-xxsmall bg-gray-200 hover:bg-gray-300 transition"
+        className="accordion-tab-btn text-[var(--color-primary)] w-full flex justify-between items-center p-xxsmall bg-gray-200 hover:bg-gray-300 transition"
       >
         <span className="font-semibold">{title}</span>
         <Image

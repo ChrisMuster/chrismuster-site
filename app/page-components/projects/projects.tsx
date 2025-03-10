@@ -25,7 +25,7 @@ export default function Projects() {
   return (
     <Section id="projects">
       <h2 className="text-4xl my-small text-center">{projects.title}</h2>
-      <div className="w-full bg-white h-full">
+      <div className="w-full bg-[var(--background)] h-full">
         <div className="p-small max-w-5xl mx-auto">
           <h1 className="text-3xl mb-xsmall text-center">{projects.gallery.title}</h1>
           <GalleryCarousel images={projects.gallery.images} />
@@ -55,7 +55,7 @@ export default function Projects() {
           </div>
 
           <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-            <div className="w-full max-w-[500px] p-xxsmall">
+            <div className="w-full max-w-[500px] p-xxsmall text-[var(--color-primary)]">
               <h2 className="text-lg font-bold">{projects.modals.modal_title}</h2>
               <p>{projects.modals.modal_text_1}</p>
               <p>{projects.modals.modal_text_2}</p>

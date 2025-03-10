@@ -6,6 +6,7 @@ export default {
     "./public/**/*.{html,js}",
     "./app/globals.css",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
