@@ -17,6 +17,7 @@ export default function Contact() {
   // Tab 1
   const tab1_title = contact.tabs_content.tab_1.title;
   const pdfFile_url = contact.tabs_content.tab_1.pdf_file_url;
+  const pdfLinkText = contact.tabs_content.tab_1.pdf_link_text;
 
   // Tab 2
   const tab2_title = contact.tabs_content.tab_2.title;
@@ -35,7 +36,7 @@ export default function Contact() {
               {tab1_title && (
                 <h1 className="text-3xl text-center font-bold mb-medium">{tab1_title}</h1>
               )}
-              <PdfViewer fileUrl={pdfFile_url} />
+              <PdfViewer fileUrl={pdfFile_url} linkText={pdfLinkText} />
             </div>
           )}
           {activeTab === "tab2" && (
