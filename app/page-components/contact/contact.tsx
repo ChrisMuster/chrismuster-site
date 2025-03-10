@@ -34,14 +34,14 @@ export default function Contact() {
           {activeTab === "tab1" && (
             <div className="py-small">
               {tab1_title && (
-                <h1 className="text-3xl text-center font-bold mb-medium">{tab1_title}</h1>
+                <h1 className="text-3xl text-center mb-medium">{tab1_title}</h1>
               )}
               <PdfViewer fileUrl={pdfFile_url} linkText={pdfLinkText} />
             </div>
           )}
           {activeTab === "tab2" && (
             <div className="flex flex-col max-w-5xl p-xsmall mx-auto my-xsmall items-center">
-              <h1 className="text-3xl font-bold mx-auto mb-xxsmall">{tab2_title}</h1>
+              <h1 className="text-3xl mx-auto mb-xxsmall">{tab2_title}</h1>
               <p className="mb-xxsmall">
                 {tab2_text}
               </p>
