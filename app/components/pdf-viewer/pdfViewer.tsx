@@ -16,7 +16,7 @@ import { cleanClassNames } from "@/utils/utils";
 // Set PDF Worker Path
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdf.worker.mjs`;
 
-export default function PdfViewer({ fileUrl, border = false, shadow = false }: PdfViewerProps) {
+export default function PdfViewer({ fileUrl, linkText, border = false, shadow = false }: PdfViewerProps) {
   const [isLoading, setIsLoading] = useState(true); // Track loading state
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -178,12 +178,12 @@ export default function PdfViewer({ fileUrl, border = false, shadow = false }: P
       </div>
       {/* Open PDF in browser default PDF viewer */}
       <Link
-        href="/documents/Chris-CV-Feb2025.pdf"
+        href={fileUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="hover:text-[var(--color-blue)] cursor-pointer mt-3"
+        className="text-[var(--color-primary)] hover:text-[var(--color-blue)] cursor-pointer mt-3"
       >
-        Open PDF in Browser View
+        {linkText || "Open in Browser"}
       </Link>
     </div>
   );

@@ -9,24 +9,25 @@ import Contact from '@/page-components/contact/contact';
 import Divider from "@/components/ui/divider";
 
 export default function Homepage() {
-
+  const dividerColor = "bg-[var(--divider)]";
+  
   return (
     <>      
       <About />
 
-      <Divider height="h-1" />
+      <Divider height="h-1" color={dividerColor} />
 
       <CodeChallenges />
 
-      <Divider height="h-1" />
+      <Divider height="h-1" color={dividerColor} />
 
       <Projects />
 
-      <Divider height="h-1" />
+      <Divider height="h-1" color={dividerColor} />
 
       <Websites />
 
-      <Divider height="h-1" />
+      <Divider height="h-1" color={dividerColor} />
 
       <Contact />
     </>

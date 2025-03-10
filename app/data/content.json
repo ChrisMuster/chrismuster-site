@@ -138,7 +138,7 @@
       },
       { 
         "id": "tab2", 
-        "label": "Tab Two"
+        "label": "Email"
       },
       { 
         "id": "tab3", 
@@ -148,16 +148,37 @@
     "tabs_content": {
       "tab_1": {
         "title": "",
-        "pdf_file_url": "/documents/Chris-CV-Feb2025.pdf"
+        "pdf_file_url": "/documents/Chris-CV-Feb2025.pdf",
+        "pdf_link_text": "Open PDF in Browser View"
       },
       "tab_2": {
-        "title": "",
-        "text": "Content for Tab Two"
+        "title": "Email me!",
+        "text": "Fill out the form below."
       },
       "tab_3": {
         "title": "",
         "text": "Content for Tab Three"
       }
     }
+  },
+  "email_form": {
+    "name_text": "Name",
+    "name_placeholder": "Your Name",
+    "name_required": "Name is required",
+    "email_text": "Email",
+    "email_placeholder": "Your Email",
+    "email_invalid": "Invalid email",
+    "email_required": "Email is required",
+    "subject_text": "Subject",
+    "subject_placeholder": "Subject",
+    "subject_required": "Subject is required",
+    "message_text": "Message",
+    "message_placeholder": "Your Message",
+    "message_required": "Message is required",
+    "message_min_chars": "Message must be at least 10 characters",
+    "button_text": "Send Message",
+    "sending_text": "Sending...",
+    "success_text": "Message sent successfully!",
+    "fail_text": "Error sending email. Please try again."
   }
 }
