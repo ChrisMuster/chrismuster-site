@@ -17,12 +17,12 @@ export default function CodeChallenges() {
             <RPSLSGame />
           </AccordionTab>
           <AccordionTab title="Project 2">
-            <h2 className="text-3xl">Project 2</h2>
-            <p>Project 2 content</p>
+            <h2 className="text-3xl">Challenge 2</h2>
+            <p>Challenge 2 content</p>
           </AccordionTab>
           <AccordionTab title="Project 3">
-            <h2 className="text-3xl">Project 3</h2>
-            <p>Project 3 content</p>
+            <h2 className="text-3xl">Challenge 3</h2>
+            <p>Challenge 3 content</p>
           </AccordionTab>
         </Accordion>
       </div>
