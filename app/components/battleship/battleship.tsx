@@ -61,14 +61,18 @@ export default function Battleship() {
 
   // Generate ships at the start of the game
   const generateShipLocations = useCallback(() => {
-    const newShips: Ship[] = [];
-    for (let i = 0; i < numShips; i++) {
+    const newShips = Array.from({ length: numShips }).reduce<Ship[]>((acc) => {
       let locations: string[];
-      do {
+
+      // Keep generating a ship until it doesn't collide
+      while (true) {
         locations = generateShip();
-      } while (collision(locations, newShips));
-      newShips.push({ locations, hits: Array(shipLength).fill("") });
-    }
+        if (!collision(locations, acc)) break; // Exit when no collision
+      }
+
+      return [...acc, { locations, hits: Array(shipLength).fill("") }];
+    }, []);
+
     setShips(newShips);
   }, [generateShip, collision, numShips, shipLength]);
 
@@ -147,7 +151,7 @@ export default function Battleship() {
     setGuesses((prev) => [...prev, location]);
     fire(location);
 
-    if (inputRef.current) {
+    if (inputRef.current && window.innerWidth >= 1024) {
       inputRef.current.focus();
     }
   }, [boardSize, guesses, fire, shipsSunk, numShips]);
@@ -166,44 +170,48 @@ export default function Battleship() {
   }, [processGuess]);
 
   return (
-    <div className="flex flex-col lg:flex-row items-center p-0 py-4 lg:p-6 bg-cover bg-center w-full rounded-md"
+    <div className="flex flex-col lg:flex-row items-center justify-center w-full p-4 bg-cover bg-center rounded-md"
       style={{ backgroundImage: "url(/images/battleship/radarbig.gif)" }}
     >
       {/* Game Board (Responsive) */}
-      <table className="border border-green-400 w-full max-w-[90%] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[800px] xl:max-w-[900px]">
-        <tbody>
-          {Array.from({ length: boardSize }).map((_, row) => (
-            <tr key={row}>
-              <Cell id={String.fromCharCode(65 + row)} isLabel />
-              {Array.from({ length: boardSize }).map((_, col) => {
-                const cellId = `${row}${col}`;
-                const isHit = ships.some((ship) => ship.locations.includes(cellId) && ship.hits[ship.locations.indexOf(cellId)] === "hit");
-                const isMiss = guesses.includes(cellId) && !isHit;
-                return (
-                  <Cell key={cellId} id={cellId} isHit={isHit} isMiss={isMiss} onClick={() => processGuess(`${String.fromCharCode(65 + row)}${col}`)} />
-                );
-              })}
-            </tr>
-          ))}
-          <tr>
-            <Cell id="empty" isLabel text="" />
-            {Array.from({ length: boardSize }).map((_, col) => (
-              <Cell key={col} id={String(col)} isLabel />
-            ))}
-          </tr>
-        </tbody>
-      </table>
+      <div className="grid grid-cols-[auto_repeat(7,minmax(0,1fr))] grid-rows-[repeat(8,minmax(0,1fr))] aspect-square w-full max-w-[90vw] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] border border-green-400">
+        {/* Row Labels (A-G) & Game Board */}
+        {Array.from({ length: boardSize }).map((_, row) => (
+          <div key={`row-${row}`} className="contents">
+            {/* Row Labels (A-G) */}
+            <Cell key={`row-label-${row}`} id={String.fromCharCode(65 + row)} isLabel />
+
+            {/* Game Board Cells */}
+            {Array.from({ length: boardSize }).map((_, col) => {
+              const cellId = `${row}${col}`;
+              const isHit = ships.some(ship => ship.locations.includes(cellId) && ship.hits[ship.locations.indexOf(cellId)] === "hit");
+              const isMiss = guesses.includes(cellId) && !isHit;
+
+              return (
+                <Cell key={cellId} id={cellId} isHit={isHit} isMiss={isMiss} onClick={() => processGuess(`${String.fromCharCode(65 + row)}${col}`)} />
+              );
+            })}
+          </div>
+        ))}
+
+        {/* Bottom row for Number Labels (0-6) */}
+        <div className="bg-gray-400"></div> {/* Empty bottom-left cell for alignment */}
+        {Array.from({ length: boardSize }).map((_, col) => (
+          <Cell key={`bottom-col-${col}`} id={String(col)} isLabel />
+        ))}
+      </div>
 
       {/* Messages & Input Section */}
       <div className="flex flex-col items-center lg:ml-6 mt-4 lg:mt-0 border border-green-400 bg-gray-300 bg-opacity-30 p-4 rounded min-w-[300px] max-w-[320px] h-[390px]">
         {/* Game Info Text */}
-        <div className="flex flex-col items-center text-white text-shadow-md font-bold border border-green-400 bg-gray-700 p-4 rounded mb-4">
+        <div className="flex flex-col items-center text-white text-shadow-md font-bold border border-green-400 bg-gray-700 p-4 rounded">
+          <p className="lg:hidden text-lg mb-2">Click on cells to <span className="text-red-600 text-2xl">FIRE!</span></p>
           <p className="text-lg mb-2">3 hits to sink each ship! Sink 3 ships to win!</p>
           <p className="text-lg">Ships Sunk: <span className="text-2xl">{shipsSunk} / {numShips}</span></p>
         </div>
 
-        {/* Guess Input and Fire Button in a Row */}
-        <div className="flex flex-row items-center justify-between gap-4">
+        {/* Show Input & Fire button ONLY on large screens and above */}
+        <div className="hidden lg:flex flex-row items-center justify-between gap-4 mt-4">
           <input ref={inputRef} type="text" placeholder="A0..." className="w-[50%] p-3 bg-gray-700 text-green-400 border border-white uppercase" disabled={shipsSunk === numShips} />
           <button
             className="p-3 w-[120px] bg-gradient-to-b from-red-600 to-red-800 
@@ -213,7 +221,6 @@ export default function Battleship() {
           >
             FIRE!
           </button>
-
         </div>
 
         {/* Display Messages */}
@@ -237,19 +244,21 @@ export default function Battleship() {
 
 // Cell Component
 const Cell = ({ id, isHit, isMiss, isLabel, text, onClick }: CellProps) => (
-  <td 
-    className={`border w-12 h-12 md:w-16 md:h-16 text-center text-lg md:text-2xl font-bold ${
-      isLabel ? "bg-gray-400 text-black" // Label cells (letters/numbers)
-      : isHit ? "bg-red-500 bg-opacity-50 text-white text-shadow-md bg-[url('/images/battleship/cruiser.png')] bg-contain bg-center bg-no-repeat" // Hit cells
-      : isMiss ? "bg-transparent text-green-400 text-shadow-md" : "bg-gray-300 bg-opacity-30" // Missed cells
-    }`} 
-    onClick={onClick}
+  <div
+    className={`flex items-center justify-center border border-green-400 
+      text-lg sm:text-xl md:text-2xl font-bold aspect-square w-full h-full ${
+      isLabel ? "bg-gray-400 text-black"
+        : isHit ? "bg-red-500 bg-opacity-50 text-white text-shadow-md bg-[url('/images/battleship/cruiser.png')] bg-contain bg-center bg-no-repeat"
+          : isMiss ? "bg-transparent text-green-400 text-shadow-md"
+            : "bg-gray-300 bg-opacity-30"
+      }`}
+    onClick={isLabel ? undefined : onClick}
   >
     {
-      isLabel ? 
-      text || id !== "empty" ? id : "" 
-      : isHit ? "HIT" 
+      isLabel ?
+      text || id !== "empty" ? id : ""
+      : isHit ? "HIT"
       : isMiss ? "MISS" : ""
     }
-  </td>
+  </div>
 );
