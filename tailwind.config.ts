@@ -1,4 +1,25 @@
 import type { Config } from "tailwindcss";
+import { PluginAPI } from "tailwindcss/types/config";
+
+// Custom text shadow utility plugin  
+const textShadowPlugin = function ({ addUtilities }: PluginAPI) {
+  const textShadowUtilities = {
+    ".text-shadow": {
+      textShadow: "2px 2px 0 rgba(0, 0, 0, 0.50)",
+    },
+    ".text-shadow-md": {
+      textShadow: "3px 3px 0 rgba(0, 0, 0, 0.50)",
+    },
+    ".text-shadow-lg": {
+      textShadow: "4px 4px 0 rgba(0, 0, 0, 0.50)",
+    },
+    ".text-shadow-none": {
+      textShadow: "0 0 transparent",
+    },
+  };
+
+  addUtilities(textShadowUtilities);
+};
 
 export default {
   content: [
@@ -48,5 +69,5 @@ export default {
     padding: ["responsive"], // Enable responsive variants for padding
     margin: ["responsive"],
   },
-  plugins: [],
+  plugins: [textShadowPlugin],
 } satisfies Config;
