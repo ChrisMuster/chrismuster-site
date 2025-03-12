@@ -166,7 +166,7 @@ export default function Battleship() {
   }, [processGuess]);
 
   return (
-    <div className="flex flex-col lg:flex-row items-center p-6 bg-cover bg-center"
+    <div className="flex flex-col lg:flex-row items-center p-0 py-4 lg:p-6 bg-cover bg-center w-full rounded-md"
       style={{ backgroundImage: "url(/images/battleship/radarbig.gif)" }}
     >
       {/* Game Board (Responsive) */}
@@ -235,14 +235,13 @@ export default function Battleship() {
   );
 }
 
-
 // Cell Component
 const Cell = ({ id, isHit, isMiss, isLabel, text, onClick }: CellProps) => (
   <td 
     className={`border w-12 h-12 md:w-16 md:h-16 text-center text-lg md:text-2xl font-bold ${
       isLabel ? "bg-gray-400 text-black" // Label cells (letters/numbers)
-      : isHit ? "bg-red-500 bg-opacity-50 text-white text-shadow-md bg-[url('/images/battleship/ship.png')] bg-contain bg-center bg-no-repeat" // Hit cells
-        : isMiss ? "bg-transparent text-green-400 text-shadow-md" : "bg-gray-300 bg-opacity-30" // Missed cells
+      : isHit ? "bg-red-500 bg-opacity-50 text-white text-shadow-md bg-[url('/images/battleship/cruiser.png')] bg-contain bg-center bg-no-repeat" // Hit cells
+      : isMiss ? "bg-transparent text-green-400 text-shadow-md" : "bg-gray-300 bg-opacity-30" // Missed cells
     }`} 
     onClick={onClick}
   >
