@@ -15,12 +15,19 @@ export default function Toggle({
       className="relative w-[74px] h-[36px] rounded-full overflow-hidden cursor-pointer focus:outline-none"
       aria-label="Toggle Theme"
     >
+
+      {/* Hidden Label (for accessibility, linked to hidden checkbox) */}
+      <label htmlFor="theme-toggle" className="sr-only"> {/* class = Screen Reader Only */}
+        Toggle Theme
+      </label>
+
       {/* Hidden checkbox for accessibility */}
       <input
         type="checkbox"
         checked={checked}
         onChange={onChange}
         className="absolute w-full h-full opacity-0"
+        aria-labelledby="theme-toggle"
       />
 
       {/* Background (switches color) */}
