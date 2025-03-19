@@ -93,71 +93,83 @@ export default function Battleship() {
   }, [boardSize, ships, guesses, processGuess]);
 
   return (
-    <div
-      className="flex flex-col lg:flex-row items-center justify-center w-full p-4 bg-cover bg-center rounded-md" 
-      style={{ backgroundImage: "url(/images/battleship/radarbig.gif)" }}
-    >
-      {/* Game Board (Responsive) */}
-      <div className="grid grid-cols-[auto_repeat(8,minmax(0,1fr))] grid-rows-[repeat(9,minmax(0,1fr))] aspect-square w-full max-w-[90vw] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] border border-green-400">
-        {/* Row Labels (A-H) and Board cells */}
-        {cells}
+    <div className="relative flex flex-col lg:flex-row items-center justify-center w-full p-4 rounded-md overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover"
+      >
+        <source src="/images/battleship/radarbig.webm" type="video/webm" />
+        Your browser does not support the video tag.
+      </video>
 
-        {/* Bottom row for Number Labels (0-7) */}
-        <div className="bg-gray-400"></div> {/* Empty bottom - left cell for alignment */}
-        {Array.from({ length: boardSize }).map((_, col) => (
-          <Cell key={`bottom-col-${col}`} id={String(col)} isLabel />
-        ))}
-      </div>
+      {/* Main Content (Above Video) */}
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center w-full p-4">
+        {/* Game Board (Responsive) */}
+        <div className="grid grid-cols-[auto_repeat(8,minmax(0,1fr))] grid-rows-[repeat(9,minmax(0,1fr))] aspect-square w-full max-w-[90vw] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] border border-green-400">
+          {/* Row Labels (A-H) and Board cells */}
+          {cells}
 
-      {/* Messages & Input Section */}
-      <div className="flex flex-col items-center lg:ml-6 mt-4 lg:mt-0 border border-green-400 bg-gray-300 bg-opacity-30 p-4 rounded min-w-[300px] max-w-fit lg:max-w-[330px] h-auto">
-        {/* Game Info Text */}
-        <div className="flex flex-col items-center text-white text-shadow-md font-bold border border-green-400 bg-gray-700 p-4 rounded">
-          <p className="lg:hidden text-lg mb-2">Click on cells to <span className="text-red-600 text-2xl">FIRE!</span></p>
-          <p className="text-lg">2 hits for a Destroyer, 3 for a Cruiser, and 4 for a Battleship. Sink all ships to win!</p>
-
-          {/* Ships Sunk Counter */}
-          <p className="text-lg mt-2">Ships Sunk:</p>
-          <div className="flex flex-row gap-4">
-            {
-              Object.entries(shipsSunk).map(([ship, count]) => (
-                <p key={ship} className={count === SHIP_TYPES.find(s => s.name === ship)?.count ? "text-red-500" : ""}>
-                  <span className="text-2xl">
-                    {ship[0]}: {count} / {SHIP_TYPES.find(s => s.name === ship)?.count}
-                  </span>
-                </p>
-              ))
-            }
-          </div>
+          {/* Bottom row for Number Labels (0-7) */}
+          <div className="bg-gray-400"></div> {/* Empty bottom - left cell for alignment */}
+          {Array.from({ length: boardSize }).map((_, col) => (
+            <Cell key={`bottom-col-${col}`} id={String(col)} isLabel />
+          ))}
         </div>
 
-        {/* Show Input & Fire button ONLY on large screens and above */}
-        <div className="hidden lg:flex flex-row items-center justify-between gap-4 mt-4" >
-          <input 
-            ref={inputRef} 
-            type="text" 
-            placeholder="A0..." 
-            className="w-[50%] p-3 bg-gray-700 text-green-400 border border-white uppercase"
-            disabled={Object.values(shipsSunk).every((count, index) => count === SHIP_TYPES[index].count)} // Disable input if all ships are sunk
-          />
+        {/* Messages & Input Section */}
+        <div className="flex flex-col items-center lg:ml-6 mt-4 lg:mt-0 border border-green-400 bg-gray-300 bg-opacity-30 p-4 rounded min-w-[300px] max-w-fit lg:max-w-[330px] h-auto">
+          {/* Game Info Text */}
+          <div className="flex flex-col items-center text-white text-shadow-md font-bold border border-green-400 bg-gray-700 p-4 rounded">
+            <p className="lg:hidden text-lg mb-2">Click on cells to <span className="text-red-600 text-2xl">FIRE!</span></p>
+            <p className="text-lg">2 hits for a Destroyer, 3 for a Cruiser, and 4 for a Battleship. Sink all ships to win!</p>
+
+            {/* Ships Sunk Counter */}
+            <p className="text-lg mt-2">Ships Sunk:</p>
+            <div className="flex flex-row gap-4">
+              {
+                Object.entries(shipsSunk).map(([ship, count]) => (
+                  <p key={ship} className={count === SHIP_TYPES.find(s => s.name === ship)?.count ? "text-red-500" : ""}>
+                    <span className="text-2xl">
+                      {ship[0]}: {count} / {SHIP_TYPES.find(s => s.name === ship)?.count}
+                    </span>
+                  </p>
+                ))
+              }
+            </div>
+          </div>
+
+          {/* Show Input & Fire button ONLY on large screens and above */}
+          <div className="hidden lg:flex flex-row items-center justify-between gap-4 mt-4" >
+            <input 
+              ref={inputRef} 
+              type="text" 
+              placeholder="A0..." 
+              className="w-[50%] p-3 bg-gray-700 text-green-400 border border-white uppercase"
+              disabled={Object.values(shipsSunk).every((count, index) => count === SHIP_TYPES[index].count)} // Disable input if all ships are sunk
+            />
+            <button
+              className="p-3 w-[120px] bg-gradient-to-b from-red-600 to-red-800 text-white font-bold rounded-lg border border-red-900 shadow-[0_4px_0_#222] hover:shadow-[0_6px_6px_rgba(0,0,0,0.5)] transition-all transform active:translate-y-[2px] active:shadow-[0_2px_2px_rgba(0,0,0,0.5)]" 
+              onClick={() => processGuess(inputRef.current?.value.toUpperCase() || "")}
+            >
+              FIRE!
+            </button>
+          </div>
+
+          {/* Display Messages */}
+          <div className="w-full max-w-[305px] h-[75px] text-green-400 font-bold text-lg bg-gray-700 p-2 rounded border-green-400 border mt-4 text-center flex items-center justify-center">
+            {message}
+          </div>
+
           <button
-            className="p-3 w-[120px] bg-gradient-to-b from-red-600 to-red-800 text-white font-bold rounded-lg border border-red-900 shadow-[0_4px_0_#222] hover:shadow-[0_6px_6px_rgba(0,0,0,0.5)] transition-all transform active:translate-y-[2px] active:shadow-[0_2px_2px_rgba(0,0,0,0.5)]" 
-            onClick={() => processGuess(inputRef.current?.value.toUpperCase() || "")}
+            className="mt-4 p-3 w-[120px] bg-gradient-to-b from-gray-300 to-gray-500 text-[var(--color-primary)] font-bold rounded-lg border border-gray-700 shadow-[0_4px_0_#222] hover:shadow-[0_6px_6px_rgba(0,0,0,0.5)] transition-all transform active:translate-y-[2px] active:shadow-[0_2px_2px_rgba(0,0,0,0.5)]" onClick={resetGame}
           >
-            FIRE!
+            Reset Game
           </button>
         </div>
-
-        {/* Display Messages */}
-        <div className="w-full max-w-[305px] h-[75px] text-green-400 font-bold text-lg bg-gray-700 p-2 rounded border-green-400 border mt-4 text-center flex items-center justify-center">
-          {message}
-        </div>
-
-        <button
-          className="mt-4 p-3 w-[120px] bg-gradient-to-b from-gray-300 to-gray-500 text-[var(--color-primary)] font-bold rounded-lg border border-gray-700 shadow-[0_4px_0_#222] hover:shadow-[0_6px_6px_rgba(0,0,0,0.5)] transition-all transform active:translate-y-[2px] active:shadow-[0_2px_2px_rgba(0,0,0,0.5)]" onClick={resetGame}
-        >
-          Reset Game
-        </button>
       </div>
     </div>
   );
