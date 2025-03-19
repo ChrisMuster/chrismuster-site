@@ -38,8 +38,7 @@ export function AccordionTab({ title, children, openByDefault = false, className
 
       {/* Tab Content */}
       <div
-        className={`accordion-tab-content overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[1000px] p-xxsmall border border-gray-200" : "max-h-0 p-none"
-          }`}
+        className={`accordion-tab-content overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[fit] p-xxsmall border border-gray-200" : "max-h-0 p-none"}`}
       >
         {children}
       </div>
