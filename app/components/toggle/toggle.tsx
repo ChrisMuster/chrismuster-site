@@ -17,7 +17,7 @@ export default function Toggle({
     >
 
       {/* Hidden Label (for accessibility, linked to hidden checkbox) */}
-      <label htmlFor="theme-toggle" className="sr-only"> {/* class = Screen Reader Only */}
+      <label id="theme-toggle" htmlFor="theme-toggle" className="sr-only"> {/* class = Screen Reader Only */}
         Toggle Theme
       </label>
 
