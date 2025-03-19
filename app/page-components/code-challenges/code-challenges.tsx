@@ -20,7 +20,7 @@ export default function CodeChallenges() {
           <AccordionTab title="Battleship">
             <div className="flex flex-col items-center text-center">
               <h2 className="text-3xl">Battleship</h2>
-              <p className="mb-4">Find and destroy all 3 of the computer&apos;s battleships!</p>
+              <p className="mb-4">Find and destroy all 5 of the computer&apos;s ships!</p>
               <Battleship />
             </div>
           </AccordionTab>
