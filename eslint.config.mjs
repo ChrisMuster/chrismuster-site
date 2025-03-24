@@ -11,6 +11,17 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // Override ONLY for jest.globals.js
+  {
+    files: ["jest.globals.js"],
+    languageOptions: {
+      sourceType: "commonjs", // Needed to support `require()` safely
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+    },
+  },
 ];
 
 export default eslintConfig;

@@ -83,6 +83,7 @@ const EmailForm = () => {
               <div className="relative">
                 <User className="absolute left-3 top-3 text-gray-400" />
                 <Field
+                  id="name"
                   type="text"
                   name="name"
                   placeholder={name_placeholder}
@@ -100,6 +101,7 @@ const EmailForm = () => {
               <div className="relative">
                 <Mail className="absolute left-3 top-3 text-gray-400" />
                 <Field
+                  id="email"
                   type="email"
                   name="email"
                   placeholder={email_placeholder}
@@ -117,6 +119,7 @@ const EmailForm = () => {
               <div className="relative">
                 <MessageSquare className="absolute left-3 top-3 text-gray-400" />
                 <Field
+                  id="subject"
                   type="text"
                   name="subject"
                   placeholder={subject_placeholder}
@@ -133,6 +136,7 @@ const EmailForm = () => {
               </label>
               <Field
                 as="textarea"
+                id="message"
                 name="message"
                 placeholder={message_placeholder}
                 rows={4}
