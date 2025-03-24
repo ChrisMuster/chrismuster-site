@@ -13,15 +13,16 @@ const customJestConfig = {
     customExportConditions: ['node'],
   },
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/app/$1',
+    '^@/app/data/(.*)\\.json$': '<rootDir>/app/data/$1.json',
     '^@/components/(.*)$': '<rootDir>/app/components/$1',
     '^@/page-components/(.*)$': '<rootDir>/app/page-components/$1',
+    '^@/(.*)$': '<rootDir>/app/$1',
   },
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   moduleDirectories: ['node_modules', '<rootDir>'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   forceExit: true,
-  detectOpenHandles: true,
+  // detectOpenHandles: true,
 };
 
 export default createJestConfig(customJestConfig);

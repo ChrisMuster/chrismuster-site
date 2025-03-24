@@ -23,6 +23,7 @@
       "@/*": ["./*"],
       "@/components/*": ["./app/components/*"],
       "@/page-components/*": ["./app/page-components/*"],
+      "@/app/data/*": ["./app/data/*"],
     },
     "types": [
       "react",
