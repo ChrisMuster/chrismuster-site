@@ -8,17 +8,25 @@ import { cleanClassNames } from "@/utils/utils";
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className = "" }) => {
   useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
     // Disable background scrolling when modal is open  
     if (isOpen) {
+      window.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
 
     return () => {
+      window.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = ''; // Cleanup on unmount  
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
