@@ -120,6 +120,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           onClick={showPrevImage}
           className="hidden md:block hover:text-[var(--color-blue)] transition-colors"
           title="Previous"
+          data-testid="nav-prev"
         >
           <ChevronLeft size={40} />
         </button>
@@ -135,6 +136,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             ref={mainImageRef}
             className="relative w-full max-w-[800px] h-auto aspect-[4/3] flex justify-center items-center overflow-hidden" 
             style={{ userSelect: "none", pointerEvents: "auto" }}
+            data-testid="main-image-wrapper"
           >
             <Image
               src={images[currentIndex].src}
@@ -144,6 +146,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 800px"
               className="object-contain rounded-lg"
               draggable={false}
+              data-testid="main-image"
             />
 
             {/* Expand Icon (Visible Only When Hovering) */}
@@ -152,6 +155,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
                 className="absolute top-2 right-2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white transition-opacity"
                 onClick={openModal}
                 title="Expand Image"
+                data-testid="expand-button"
               >
                 <Expand size={24} />
               </button>
@@ -163,6 +167,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           onClick={showNextImage}
           className="hidden md:block hover:text-[var(--color-blue)] transition-colors"
           title="Next"
+          data-testid="nav-next"
         >
           <ChevronRight size={40} />
         </button>
@@ -170,7 +175,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
 
       {/* Captions */}
       {showCaptions && images[currentIndex].title && (
-        <p className="text-center text-lg font-semibold mt-2">{images[currentIndex].title}</p>
+        <p className="text-center text-lg font-semibold mt-2" data-testid="caption">{images[currentIndex].title}</p>
       )}
 
       {/* Thumbnails */}
@@ -180,6 +185,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           disabled={scrollIndex === 0}
           className="hover:text-[var(--color-blue)] transition-colors disabled:opacity-50"
           title="Previous"
+          data-testid="thumb-scroll-left"
         >
           <ChevronLeft size={32} />
         </button>
@@ -198,6 +204,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
                 <button
                   key={index}
                   onClick={() => selectImage(index)}
+                  data-testid={`thumbnail-${index}`}
                   className="relative flex-shrink-0"
                   style={{
                     width: isPartiallyVisible ? `${partialThumbnailWidth}px` : `${thumbnailWidth}px`,
@@ -207,7 +214,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
                 >
                   <Image
                     src={image.src}
-                    alt={image.alt || "Thumbnail"}
+                    alt={image.alt || `Thumbnail ${index + 1}`}
                     title={image.title || ""}
                     width={thumbnailWidth}
                     height={60}
@@ -224,6 +231,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           disabled={scrollIndex >= images.length - visibleThumbnails}
           className="hover:text-[var(--color-blue)] transition-colors disabled:opacity-50"
           title="Next"
+          data-testid="thumb-scroll-right"
         >
           <ChevronRight size={32} />
         </button>
@@ -244,6 +252,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             }}
             className="absolute left-2 top-1/2 -translate-y-1/2 text-[var(--color-primary)] hover:text-[var(--color-blue)] transition-colors hidden md:block z-50"
             title="Previous"
+            data-testid="modal-prev"
           >
             <ChevronLeft size={40} />
           </button>
@@ -256,6 +265,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             sizes="(max-width: 1280px) 90vw, 1100px" 
             className="object-contain rounded-lg" 
             draggable={false}
+            data-testid="modal-image"
           />
 
           <button
@@ -265,6 +275,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             }}
             className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--color-primary)] hover:text-[var(--color-blue)] transition-colors hidden md:block z-50"
             title="Next"
+            data-testid="modal-next"
           >
             <ChevronRight size={40} />
           </button>
@@ -275,6 +286,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             <button
               key={index}
               onClick={() => updateIndex(index)}
+              data-testid={`modal-dot-${index}`}
               className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? "w-4 h-3 bg-[var(--color-blue)]" : "bg-gray-400"}`}
               title={image.title || ""}
             />
