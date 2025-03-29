@@ -2,6 +2,7 @@
 import Section from "@/components/section/section";
 import Hero from "@/components/hero/hero";
 import Content from "@/components/content/content";
+import Button from "@/components/ui/button";
 
 import content from "@/app/data/content.json";
 import { scrollToSection } from "@/utils/utils";
@@ -18,15 +19,13 @@ export default function About() {
       <div className="p-small md:px-medium lg:px-xlarge xl:px-xxlarge xxl:max-w-[1425px] xxl:mx-auto">
         <Content imageSrc={about.content_img} useBackgroundImage>
           <h3 className="text-2xl font-bold mb-xxsmall">{about.title}</h3>
+          
           <p className="text-lg mb-xxsmall">{about.text_1}</p>
           <p className="text-lg">{about.text_2}</p>
-          <button
-            onClick={() => {
-              scrollToSection("contact");
-            }}
-            className="w-fit mt-xsmall bg-[var(--color-blue)] hover:bg-blue-900 text-white px-xxsmall py-2 rounded-md">
+
+          <Button variant="primary" size="medium" className="w-fit mt-xsmall" onClick={() => scrollToSection("contact")}>
             {about.button_text}
-          </button>
+          </ Button>
         </Content>
       </div>
     </Section>

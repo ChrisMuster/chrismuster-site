@@ -7,6 +7,7 @@ import Section from "@/components/section/section";
 import Modal from "@/components/modal/modal";
 import Divider from "@/components/ui/divider";
 import GalleryCarousel from "@/components/gallery-carousel/gallery-carousel";
+import Button from "@/components/ui/button";
 
 import content from "@/app/data/content.json";
 
@@ -39,9 +40,10 @@ export default function Projects() {
           <div className="flex flex-col md:flex-row justify-around">
             <div className="flex flex-col">
               <p className="mb-xxsmall">{projects.modals.button_label}</p>
-              <button onClick={handleOpenModal} className="w-fit mb-small px-xxsmall py-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded">
+
+              <Button variant="primary" size="medium" className="w-fit mb-small" onClick={handleOpenModal}>
                 {projects.modals.button_text}
-              </button>
+              </ Button>
             </div>
             <div className="w-fit h-fit">
               <Link
