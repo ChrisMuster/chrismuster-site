@@ -6,45 +6,53 @@ export function useShips(boardSize: number) {
   const [ships, setShips] = useState<Ship[]>([]);
   const [shipsSunk, setShipsSunk] = useState({ Destroyer: 0, Cruiser: 0, Battleship: 0 });
 
-  // Generate a random ship
-  const generateShip = useCallback((size: number): string[] => {
-    const direction = Math.random() < 0.5;
-    let row, col;
-    if (direction) {
-      // Horizontal
-      row = Math.floor(Math.random() * boardSize);
-      col = Math.floor(Math.random() * (boardSize - size + 1));
-    } else {
-      // Vertical
-      row = Math.floor(Math.random() * (boardSize - size + 1));
-      col = Math.floor(Math.random() * boardSize);
-    }
-    return Array.from({ length: size }, (_, i) => (direction ? `${row}${col + i}` : `${row + i}${col}`));
-  }, [boardSize]);
-
-  // Check for ship collisions
-  const collision = useCallback(
-    (locations: string[], newShips: Ship[]) => newShips.some(ship => ship.locations.some(loc => locations.includes(loc))),
-    []
-  );
-
-  // Generate ships at the start of the game
+  // Generate all ships while avoiding overlap
   const generateShipLocations = useCallback(() => {
-    setShips(() =>
-      SHIP_TYPES.reduce<Ship[]>((acc, { name, size, count, image }) => {
-        const ships = Array.from({ length: count }, () => {
-          let locations: string[];
-          do {
-            locations = generateShip(size);
-          } while (collision(locations, acc)); // Check against accumulated ships
+    const newShips: Ship[] = [];
+    const occupied = new Set<string>();
+    const maxAttempts = 1000;
 
-          return { name, locations, hits: Array(size).fill(""), image };
-        });
+    // generate a single random ship location
+    const generateShip = (size: number): string[] => {
+      const isHorizontal = Math.random() < 0.5;
+      const row = Math.floor(Math.random() * (isHorizontal ? boardSize : boardSize - size + 1));
+      const col = Math.floor(Math.random() * (isHorizontal ? boardSize - size + 1 : boardSize));
 
-        return [...acc, ...ships]; // Append new ships to accumulated list
-      }, [])
-    );
-  }, [generateShip, collision]);
+      return Array.from({ length: size }, (_, i) =>
+        isHorizontal ? `${row}${col + i}` : `${row + i}${col}`
+      );
+    };
+
+    for (const { name, size, count, image } of SHIP_TYPES) {
+      let created = 0;
+      let attempts = 0;
+
+      // Check for ship collisions
+      while (created < count && attempts < maxAttempts) {
+        const locations = generateShip(size);
+        const hasCollision = locations.some(loc => occupied.has(loc));
+
+        if (!hasCollision) {
+          locations.forEach(loc => occupied.add(loc));
+          newShips.push({
+            name,
+            locations,
+            hits: Array(size).fill(""),
+            image,
+          });
+          created++;
+        }
+
+        attempts++;
+      }
+
+      if (attempts >= maxAttempts) {
+        console.warn(`Max attempts reached when placing ${name}. Board may be too small.`);
+      }
+    }
+
+    setShips(newShips);
+  }, [boardSize]);
 
   useEffect(() => {
     generateShipLocations();
