@@ -53,11 +53,20 @@ describe("EmailForm Component", () => {
     await user.type(screen.getByLabelText(/Name/i), "Chris");
     await user.type(screen.getByLabelText(/Email/i), "chris@example.com");
     await user.type(screen.getByLabelText(/Subject/i), "Hello");
-    await user.type(screen.getByLabelText(/Message/i), "This is a valid test message!");
+    await user.type(
+      screen.getByLabelText(/Message/i),
+      "This is a valid test message!"
+    );
 
     await user.click(screen.getByRole("button", { name: /Send Message/i }));
 
     expect(await screen.findByText(/Message sent successfully/i)).toBeInTheDocument();
+
+    // ensure fields are reset after successful submission
+    expect(screen.getByLabelText(/Name/i)).toHaveValue("");
+    expect(screen.getByLabelText(/Email/i)).toHaveValue("");
+    expect(screen.getByLabelText(/Subject/i)).toHaveValue("");
+    expect(screen.getByLabelText(/Message/i)).toHaveValue("");
   });
 
   it("shows error message on API failure", async () => {
