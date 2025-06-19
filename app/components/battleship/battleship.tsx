@@ -152,8 +152,13 @@ export default function Battleship() {
               disabled={Object.values(shipsSunk).every((count, index) => count === SHIP_TYPES[index].count)} // Disable input if all ships are sunk
             />
             <button
-              className="p-3 w-[120px] bg-gradient-to-b from-red-600 to-red-800 text-white font-bold rounded-lg border border-red-900 shadow-[0_4px_0_#222] hover:shadow-[0_6px_6px_rgba(0,0,0,0.5)] transition-all transform active:translate-y-[2px] active:shadow-[0_2px_2px_rgba(0,0,0,0.5)]" 
-              onClick={() => processGuess(inputRef.current?.value.toUpperCase() || "")}
+              className="p-3 w-[120px] bg-gradient-to-b from-red-600 to-red-800 text-white font-bold rounded-lg border border-red-900 shadow-[0_4px_0_#222] hover:shadow-[0_6px_6px_rgba(0,0,0,0.5)] transition-all transform active:translate-y-[2px] active:shadow-[0_2px_2px_rgba(0,0,0,0.5)]"
+              onClick={() => {
+                processGuess(inputRef.current?.value.toUpperCase() || "");
+                if (inputRef.current) {
+                  inputRef.current.value = "";
+                }
+              }}
             >
               FIRE!
             </button>
