@@ -51,7 +51,7 @@ export default {
         medium: "3rem", // Custom class for medium padding 48px
         large: "4rem", // Custom class for large padding 64px
         xlarge: "6rem", // Custom class for xlarge padding 96px
-        xxlarge: "8rem", // Custom class for xlarge padding 128px
+        xxlarge: "8rem", // Custom class for xxlarge padding 128px
       },
       margin: {
         none: "0px",
