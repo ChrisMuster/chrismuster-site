@@ -23,9 +23,9 @@ export default function About() {
           <p className="text-lg mb-xxsmall">{about.text_1}</p>
           <p className="text-lg">{about.text_2}</p>
 
-          <Button variant="primary" size="medium" className="w-fit mt-xsmall" onClick={() => scrollToSection("contact")}>
+          <Button variant="primary" size="medium" className="w-fit mt-xsmall" onClick={() => scrollToSection("contact") }>
             {about.button_text}
-          </ Button>
+          </Button>
         </Content>
       </div>
     </Section>

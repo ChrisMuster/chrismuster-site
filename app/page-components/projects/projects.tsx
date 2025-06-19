@@ -43,7 +43,7 @@ export default function Projects() {
 
               <Button variant="primary" size="medium" className="w-fit mb-small" onClick={handleOpenModal}>
                 {projects.modals.button_text}
-              </ Button>
+              </Button>
             </div>
             <div className="w-fit h-fit">
               <Link
