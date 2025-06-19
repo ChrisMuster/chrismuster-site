@@ -19,13 +19,13 @@ const outcomes: Outcomes = {
   paper: {
     rock: "Paper covers Rock.",
     paper: "It's a tie!",
-    scissors: "Scissors cuts Paper.",
+    scissors: "Scissors cut Paper.",
     lizard: "Lizard eats Paper.",
     spock: "Paper disproves Spock.",
   },
   scissors: {
     rock: "Rock smashes Scissors.",
-    paper: "Scissors cuts Paper.",
+    paper: "Scissors cut Paper.",
     scissors: "It's a tie!",
     lizard: "Scissors decapitates Lizard.",
     spock: "Spock smashes Scissors.",
