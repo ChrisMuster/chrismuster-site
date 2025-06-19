@@ -1,4 +1,4 @@
-// app/tests/mocks/handlers.ts
+// tests/mocks/handlers.ts
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
