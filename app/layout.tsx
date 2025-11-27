@@ -35,7 +35,7 @@ export default function RootLayout({
         <link rel="manifest" href="/favicons/site.webmanifest" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className={`${roboto.variable} antialiased`}>
+      <body className={`${roboto.variable} antialiased`} suppressHydrationWarning={true}>
         <Layout>{children}</Layout>
         <SpeedInsights />
         <Analytics />
