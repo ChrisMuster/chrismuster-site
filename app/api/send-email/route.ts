@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 import { EmailFormValues } from "@/components/email/email-form.types";
 
 import dotenv from "dotenv";
+export const runtime = "nodejs";
 
 dotenv.config();
 
@@ -20,19 +21,20 @@ export async function POST(req: Request) {
       console.error("Missing SMTP configuration");
       return NextResponse.json({ error: "SMTP configuration error" }, { status: 500 });
     }
-
+     
     // Create Nodemailer transporter
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
-      secure: false, // Use `false` for STARTTLS
+      secure: true,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
       tls: {
-        rejectUnauthorized: false, // Allow self-signed certificates
-      },
+        rejectUnauthorized: false,
+        minVersion: "TLSv1.2",
+      }
     });
 
     // Verify SMTP connection
