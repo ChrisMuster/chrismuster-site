@@ -23,7 +23,6 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-pdf": "^10.2.0",
-    "undici": "^7.5.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {
@@ -45,6 +44,7 @@
     "msw": "^2.7.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "undici": "^7.5.0"
   }
 }

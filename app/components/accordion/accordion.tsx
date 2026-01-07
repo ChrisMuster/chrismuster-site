@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo } from "react";
 import Image from "next/image";
 
 import { AccordionProps, AccordionTabProps } from "@/components/accordion/accordion.types";
 
 import { cleanClassNames } from "@/utils/utils";
-
 
 export function Accordion({ children, className = "" }: AccordionProps) {
   return (
@@ -16,7 +15,7 @@ export function Accordion({ children, className = "" }: AccordionProps) {
   );
 }
 
-export function AccordionTab({ title, children, openByDefault = false, className = "" }: AccordionTabProps) {
+export const AccordionTab = memo(function AccordionTab({ title, children, openByDefault = false, className = "" }: AccordionTabProps) {
   const [isOpen, setIsOpen] = useState(openByDefault);
 
   return (
@@ -45,4 +44,4 @@ export function AccordionTab({ title, children, openByDefault = false, className
       </div>
     </div>
   );
-}
+});

@@ -2,10 +2,7 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { EmailFormValues } from "@/components/email/email-form.types";
 
-import dotenv from "dotenv";
 export const runtime = "nodejs";
-
-dotenv.config();
 
 export async function POST(req: Request) {
   try {
@@ -32,7 +29,8 @@ export async function POST(req: Request) {
         pass: process.env.SMTP_PASS,
       },
       tls: {
-        rejectUnauthorized: false,
+        // Only disable cert validation in development
+        rejectUnauthorized: process.env.NODE_ENV === 'production',
         minVersion: "TLSv1.2",
       }
     });

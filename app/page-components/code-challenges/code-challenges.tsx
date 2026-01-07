@@ -1,11 +1,19 @@
+import dynamic from "next/dynamic";
 
 import Section from "@/components/section/section";
 import { Accordion, AccordionTab } from "@/components/accordion/accordion";
-import RPSLSGame from "@/components/RPSLSGame/RPSLSGame";
-import Battleship from "@/components/battleship/battleship";
 import CoinFlipper from "@/components/coins/coinflipper";
 
 import content from "@/app/data/content.json";
+
+// Lazy load game components to reduce initial bundle size
+const RPSLSGame = dynamic(() => import("@/components/RPSLSGame/RPSLSGame"), {
+  loading: () => <p className="text-center">Loading game...</p>,
+});
+
+const Battleship = dynamic(() => import("@/components/battleship/battleship"), {
+  loading: () => <p className="text-center">Loading game...</p>,
+});
 
 export default function CodeChallenges() {
   const { code_challenges } = content;

@@ -7,7 +7,7 @@ const getCellText = (isHit: boolean, isMiss: boolean) => {
   return "";
 };
 
-export const Cell: React.FC<CellProps> = ({ id, isHit, isMiss, isLabel, text, onClick, shipImage }) => {
+const CellComponent: React.FC<CellProps> = ({ id, isHit, isMiss, isLabel, text, onClick, shipImage }) => {
   const validShipImage = shipImage ? `url(${shipImage})` : "none";
   const cellStyle: React.CSSProperties = isHit ? {
     backgroundImage: validShipImage,
@@ -31,3 +31,7 @@ export const Cell: React.FC<CellProps> = ({ id, isHit, isMiss, isLabel, text, on
     </div>
   );
 };
+
+CellComponent.displayName = 'Cell';
+
+export const Cell = React.memo(CellComponent);

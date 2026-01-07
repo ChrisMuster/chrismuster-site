@@ -87,10 +87,13 @@ const EmailForm = () => {
                   type="text"
                   name="name"
                   placeholder={name_placeholder}
+                  aria-required="true"
+                  aria-invalid={!!validationSchema.fields.name}
+                  aria-describedby="name-error"
                   className="w-full pl-10 p-3 border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
-              <ErrorMessage name="name" component="div" className="text-red-500 text-sm mt-1" />
+              <ErrorMessage name="name" component="div" id="name-error" className="text-red-500 text-sm mt-1" />
             </div>
 
             {/* Email Field */}
@@ -105,10 +108,13 @@ const EmailForm = () => {
                   type="email"
                   name="email"
                   placeholder={email_placeholder}
+                  aria-required="true"
+                  aria-invalid={!!validationSchema.fields.email}
+                  aria-describedby="email-error"
                   className="w-full pl-10 p-3 border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
-              <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+              <ErrorMessage name="email" component="div" id="email-error" className="text-red-500 text-sm mt-1" />
             </div>
 
             {/* Subject Field */}
@@ -123,10 +129,13 @@ const EmailForm = () => {
                   type="text"
                   name="subject"
                   placeholder={subject_placeholder}
+                  aria-required="true"
+                  aria-invalid={!!validationSchema.fields.subject}
+                  aria-describedby="subject-error"
                   className="w-full pl-10 p-3 border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
-              <ErrorMessage name="subject" component="div" className="text-red-500 text-sm mt-1" />
+              <ErrorMessage name="subject" component="div" id="subject-error" className="text-red-500 text-sm mt-1" />
             </div>
 
             {/* Message Field */}
@@ -140,9 +149,12 @@ const EmailForm = () => {
                 name="message"
                 placeholder={message_placeholder}
                 rows={4}
+                aria-required="true"
+                aria-invalid={!!validationSchema.fields.message}
+                aria-describedby="message-error"
                 className="w-full p-3 text-[var(--color-primary)] border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
-              <ErrorMessage name="message" component="div" className="text-red-500 text-sm mt-1" />
+              <ErrorMessage name="message" component="div" id="message-error" className="text-red-500 text-sm mt-1" />
             </div>
 
             {/* Submit Button */}
