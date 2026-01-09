@@ -16,20 +16,34 @@ const CoinFlipper: React.FC = () => {
   const [results, setResults] = useState<CoinRecord[]>([]);
   const [message, setMessage] = useState("");
   const [isFlipping, setIsFlipping] = useState(false);
+  const [highlightFinalThree, setHighlightFinalThree] = useState(false);
 
   const reset = async () => {
     setResults([]);
     setMessage("");
+    setHighlightFinalThree(false);
     setIsFlipping(false);
     await new Promise((r) => setTimeout(r, 0));
   };
 
   const handleFlipComplete = (index: number) => {
-    setResults((prev) =>
-      prev.map((coin, i) =>
+    setResults((prev) => {
+      const updated = prev.map((coin, i) =>
         i === index ? { ...coin, shouldAnimate: false } : coin
-      )
-    );
+      );
+
+      // Check for final 3 completed heads in updated results
+      const lastThree = updated.slice(-3);
+      const allHeads = lastThree.length === 3 && lastThree.every((r) => r.result === "heads");
+      const allDone = lastThree.every((r) => !r.shouldAnimate);
+
+      // Only if all conditions met
+      if (allHeads && allDone) {
+        setHighlightFinalThree(true);
+      }
+
+      return updated;
+    });
   };
 
   const flipSequence = async () => {
@@ -54,12 +68,8 @@ const CoinFlipper: React.FC = () => {
     setIsFlipping(false);
   };
 
-
-  const lastThree = results.slice(-3);
   const isFinalThree = (index: number) =>
-    lastThree.length === 3 &&
-    index >= results.length - 3 &&
-    lastThree.every((r) => r.result === "heads");
+    highlightFinalThree && index >= results.length - 3;
 
   return (
     <div className="flex flex-col items-center p-6">

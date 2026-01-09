@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -13,21 +14,23 @@ const Coin: React.FC<CoinProps> = ({
 }) => {
   const innerRef = useRef<HTMLDivElement>(null);
   const [animationDone, setAnimationDone] = useState(!shouldAnimate);
+  const [forceRender, setForceRender] = useState(0);
 
   useEffect(() => {
-    if (!shouldAnimate) {
-      // Immediately show correct face
+    // Trigger a re-render when highlight changes
+    setForceRender((prev) => prev + 1);
+  }, [highlight]);
+
+  useEffect(() => {
+    if (!shouldAnimate && innerRef.current) {
       const rotation = result === "heads" ? "rotateY(0deg)" : "rotateY(180deg)";
-      if (innerRef.current) {
-        innerRef.current.style.transform = rotation;
-      }
+      innerRef.current.style.transform = rotation;
     }
   }, [shouldAnimate, result]);
 
   const handleAnimationEnd = () => {
-    // Snap to final face after spin
-    const rotation = result === "heads" ? "rotateY(0deg)" : "rotateY(180deg)";
     if (innerRef.current) {
+      const rotation = result === "heads" ? "rotateY(0deg)" : "rotateY(180deg)";
       innerRef.current.style.transform = rotation;
     }
     setAnimationDone(true);
@@ -36,6 +39,7 @@ const Coin: React.FC<CoinProps> = ({
 
   return (
     <div
+      key={forceRender} // Force re-render when highlight changes
       className="inline-block"
       style={{
         perspective: 1000,
@@ -47,8 +51,8 @@ const Coin: React.FC<CoinProps> = ({
       <div
         ref={innerRef}
         className={cleanClassNames(
-          "relative w-full h-full rounded-full shadow-lg border-4 transition-all",
-          highlight ? "border-green-500 scale-105" : "border-yellow-600",
+          "relative w-full h-full rounded-full border-4 transition-all duration-300 ease-in-out",
+          `${highlight ? "border-green-500 scale-105" : "border-transparent"}`,
           shouldAnimate && !animationDone ? "animate-spin-coin" : ""
         )}
         style={{
@@ -64,13 +68,12 @@ const Coin: React.FC<CoinProps> = ({
             transform: "rotateY(0deg)",
           }}
         >
-          <svg className="w-full h-full" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="30" fill="#FFD93B" stroke="#B58300" strokeWidth="4" />
-            <circle cx="32" cy="24" r="10" fill="#F4A261" />
-            <path d="M22 44c0-5 20-5 20 0v4H22v-4z" fill="#E76F51" />
-            <circle cx="24" cy="22" r="2" fill="#000" />
-            <circle cx="40" cy="22" r="2" fill="#000" />
-          </svg>
+          <img
+            src="/images/coins/Heads-svg.svg"
+            alt="Heads"
+            className="w-full h-full object-contain"
+            draggable={false}
+          />
         </div>
 
         {/* TAILS Face */}
@@ -81,13 +84,12 @@ const Coin: React.FC<CoinProps> = ({
             transform: "rotateY(180deg)",
           }}
         >
-          <svg className="w-full h-full" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="30" fill="#FED766" stroke="#B58300" strokeWidth="4" />
-            <polygon
-              points="32,14 36,28 52,28 38,36 42,50 32,40 22,50 26,36 12,28 28,28"
-              fill="#6A4C93"
-            />
-          </svg>
+          <img
+            src="/images/coins/Tails-svg.svg"
+            alt="Tails"
+            className="w-full h-full object-contain"
+            draggable={false}
+          />
         </div>
       </div>
     </div>
