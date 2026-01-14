@@ -6,6 +6,7 @@ import { GalleryCarouselProps } from "@/components/gallery-carousel/gallery-caro
 import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
 import Image from "next/image";
 import Modal from "@/components/modal/modal";
+import Button from "@/components/ui/button";
 import { cleanClassNames } from "@/utils/utils";
 
 export default function GalleryCarousel({ images, showCaptions = false, className = "" }: GalleryCarouselProps) {
@@ -116,14 +117,14 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
     <div className={cleanClassNames("gallery-carousel w-full flex flex-col items-center", className)}>
       {/* Navigation Controls (Only on Medium Screens & Above) */}
       <div className="flex items-center w-full max-w-3xl justify-between mt-xxsmall">
-        <button
+        <Button
           onClick={showPrevImage}
           className="hidden md:block hover:text-[var(--color-blue)] transition-colors"
           title="Previous"
           data-testid="nav-prev"
         >
           <ChevronLeft size={40} />
-        </button>
+        </Button>
 
         <div
           className="relative flex justify-center items-center w-full max-w-3xl"
@@ -151,26 +152,26 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
 
             {/* Expand Icon (Visible Only When Hovering) */}
             {(isHovering || visibleThumbnails === 3) && (
-              <button
-                className="absolute top-2 right-2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white transition-opacity"
+              <Button
                 onClick={openModal}
+                className="absolute top-2 right-2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white transition-opacity"
                 title="Expand Image"
                 data-testid="expand-button"
               >
                 <Expand size={24} />
-              </button>
+              </Button>
             )}
           </div>
         </div>
 
-        <button
+        <Button
           onClick={showNextImage}
           className="hidden md:block hover:text-[var(--color-blue)] transition-colors"
           title="Next"
           data-testid="nav-next"
         >
           <ChevronRight size={40} />
-        </button>
+        </Button>
       </div>
 
       {/* Captions */}
@@ -180,7 +181,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
 
       {/* Thumbnails */}
       <div className="thumbnails relative mt-xxsmall w-full max-w-3xl overflow-hidden flex items-center justify-center">
-        <button
+        <Button
           onClick={() => scrollThumbnails("left")}
           disabled={scrollIndex === 0}
           className="hover:text-[var(--color-blue)] transition-colors disabled:opacity-50"
@@ -188,7 +189,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           data-testid="thumb-scroll-left"
         >
           <ChevronLeft size={32} />
-        </button>
+        </Button>
 
         {/* Thumbnails Container - This will shift based on the active index */}
         <div className="relative w-[calc(5*90px+40px)] overflow-hidden">
@@ -226,7 +227,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           </div>
         </div>
 
-        <button
+        <Button
           onClick={() => scrollThumbnails("right")}
           disabled={scrollIndex >= images.length - visibleThumbnails}
           className="hover:text-[var(--color-blue)] transition-colors disabled:opacity-50"
@@ -234,7 +235,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           data-testid="thumb-scroll-right"
         >
           <ChevronRight size={32} />
-        </button>
+        </Button>
       </div>
 
       {/* Modal */}
@@ -245,7 +246,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           className="relative flex justify-center items-center p-xsmall w-[95vw] max-w-[1100px] min-h-[500px]"
           style={{ touchAction: "none", userSelect: "none", pointerEvents: "auto" }}
         >
-          <button
+          <Button
             onClick={(e) => {
               e.stopPropagation();
               showPrevImage();
@@ -255,7 +256,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             data-testid="modal-prev"
           >
             <ChevronLeft size={40} />
-          </button>
+          </Button>
 
           <Image 
             src={images[currentIndex].src} 
@@ -268,7 +269,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             data-testid="modal-image"
           />
 
-          <button
+          <Button
             onClick={(e) => {
               e.stopPropagation();
               showNextImage();
@@ -278,17 +279,18 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
             data-testid="modal-next"
           >
             <ChevronRight size={40} />
-          </button>
+          </Button>
         </div>
         {/* Dot Navigation */}
         <div className="flex justify-center mt-xxsmall space-x-2 pb-xxsmall">
           {images.map((image, index) => (
-            <button
+            <Button
               key={index}
               onClick={() => updateIndex(index)}
-              data-testid={`modal-dot-${index}`}
               className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? "w-4 h-3 bg-[var(--color-blue)]" : "bg-gray-400"}`}
-              title={image.title || ""}
+              title={image.title || `Image ${index + 1}`}
+              aria-label={`Go to ${image.title || `image ${index + 1}`}`}
+              data-testid={`modal-dot-${index}`}
             />
           ))}
         </div>

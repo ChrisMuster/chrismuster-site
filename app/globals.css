@@ -56,3 +56,17 @@ html {
     @apply xl:grid-cols-1 xl:grid-cols-2 xl:grid-cols-3 xl:grid-cols-4 xl:grid-cols-5 xl:grid-cols-6;
   }
 }
+
+@keyframes spin-coin {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(2160deg);
+  }
+}
+
+.animate-spin-coin {
+  animation: spin-coin 2.5s linear forwards;
+}

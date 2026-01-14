@@ -2,10 +2,13 @@ import { TabsProps } from "@/components/tabs/tabs.types";
 
 export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
   return (
-    <div className="tab-buttons flex relative">
+    <div className="tab-buttons flex relative" role="tablist">
       {tabs.map((tab) => (
         <button
           key={tab.id}
+          role="tab"
+          aria-selected={activeTab === tab.id}
+          aria-controls={`tabpanel-${tab.id}`}
           className={`relative px-xxsmall sm:px-xsmall py-3 sm:text-lg font-semibold transition-colors duration-200 
             ${activeTab === tab.id
             ? "border border-gray-300 border-b-[var(--background)] bg-[var(--background)] text-[var(--foreground)] z-20"

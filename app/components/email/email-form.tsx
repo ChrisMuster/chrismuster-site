@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Mail, User, MessageSquare, Send } from "lucide-react";
 import { EmailFormValues } from "@/components/email/email-form.types";
+import Button from "@/components/ui/button";
 import content from "@/app/data/content.json";
 
 const EmailForm = () => {
@@ -65,7 +66,10 @@ const EmailForm = () => {
               setFormStatus("success");
               resetForm();
             } else {
-              throw new Error("Failed to send email");
+              // Log the actual error from the server
+              const errorData = await response.json().catch(() => ({}));
+              console.error("Server error:", response.status, errorData);
+              throw new Error(errorData.error || `Server error: ${response.status}`);
             }
           } catch (error) {
             console.error("Error sending email:", error);
@@ -73,7 +77,7 @@ const EmailForm = () => {
           }
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched }) => (
           <Form className="sm:min-w-[320px] flex flex-col gap-4">
             {/* Name Field */}
             <div className="relative">
@@ -87,10 +91,13 @@ const EmailForm = () => {
                   type="text"
                   name="name"
                   placeholder={name_placeholder}
+                  aria-required="true"
+                  aria-invalid={touched.name && !!errors.name}
+                  aria-describedby="name-error"
                   className="w-full pl-10 p-3 border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
-              <ErrorMessage name="name" component="div" className="text-red-500 text-sm mt-1" />
+              <ErrorMessage name="name" component="div" id="name-error" className="text-red-500 text-sm mt-1" />
             </div>
 
             {/* Email Field */}
@@ -105,10 +112,13 @@ const EmailForm = () => {
                   type="email"
                   name="email"
                   placeholder={email_placeholder}
+                  aria-required="true"
+                  aria-invalid={touched.email && !!errors.email}
+                  aria-describedby="email-error"
                   className="w-full pl-10 p-3 border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
-              <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+              <ErrorMessage name="email" component="div" id="email-error" className="text-red-500 text-sm mt-1" />
             </div>
 
             {/* Subject Field */}
@@ -123,10 +133,13 @@ const EmailForm = () => {
                   type="text"
                   name="subject"
                   placeholder={subject_placeholder}
+                  aria-required="true"
+                  aria-invalid={touched.subject && !!errors.subject}
+                  aria-describedby="subject-error"
                   className="w-full pl-10 p-3 border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
-              <ErrorMessage name="subject" component="div" className="text-red-500 text-sm mt-1" />
+              <ErrorMessage name="subject" component="div" id="subject-error" className="text-red-500 text-sm mt-1" />
             </div>
 
             {/* Message Field */}
@@ -140,20 +153,24 @@ const EmailForm = () => {
                 name="message"
                 placeholder={message_placeholder}
                 rows={4}
+                aria-required="true"
+                aria-invalid={touched.message && !!errors.message}
+                aria-describedby="message-error"
                 className="w-full p-3 text-[var(--color-primary)] border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
-              <ErrorMessage name="message" component="div" className="text-red-500 text-sm mt-1" />
+              <ErrorMessage name="message" component="div" id="message-error" className="text-red-500 text-sm mt-1" />
             </div>
 
             {/* Submit Button */}
-            <button
+            <Button
+              variant="primary"
               type="submit"
               disabled={isSubmitting}
-              className="bg-[var(--color-blue)] text-white flex items-center justify-center gap-2 py-3 rounded-md hover:bg-blue-900 transition focus-visible:outline-none"
+              className="flex items-center justify-center gap-2"
             >
               <Send className="w-5 h-5" />
               {isSubmitting ? sending_text : button_text}
-            </button>
+            </Button>
 
             {/* Success / Error Message */}
             {formStatus === "success" && (

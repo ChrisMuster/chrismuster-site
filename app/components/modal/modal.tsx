@@ -3,6 +3,7 @@
 
 import React, { useEffect } from 'react';
 import { ModalProps } from '@/components/modal/modal.types';
+import Button from '@/components/ui/button';
 
 import { cleanClassNames } from "@/utils/utils";
 
@@ -41,12 +42,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className = ""
         className={cleanClassNames("modal-content bg-white rounded-lg p-xxsmall shadow-lg relative", className)}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          className="absolute top-1 right-3 text-4xl text-gray-500 hover:text-gray-700 z-50"
+        <Button
           onClick={onClose}
+          className="absolute top-1 right-3 text-4xl text-gray-500 hover:text-gray-700 z-50"
+          aria-label="Close modal"
         >
           &times;
-        </button>
+        </Button>
         {children}
       </div>
     </div>

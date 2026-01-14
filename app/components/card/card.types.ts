@@ -8,5 +8,6 @@ export interface CardProps {
   buttonLink?: string;
   onClick?: () => void;
   shadow?: "light" | "dark";
-  className?: string; // Allow additional styling if needed
+  className?: string;
+  external?: boolean; // Whether the link is external (opens in new tab)
 }

@@ -1,7 +1,7 @@
 // Utility functions
 
 // Capitalises words
-export const capitalize = (word: string) => word[0].toUpperCase() + word.slice(1);
+export const capitalize = (word: string) => word.length > 0 ? word[0].toUpperCase() + word.slice(1) : '';
 
 // function used to scroll to element with specific id
 export const scrollToSection = (id: string) => {

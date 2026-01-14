@@ -1,10 +1,19 @@
+import dynamic from "next/dynamic";
 
 import Section from "@/components/section/section";
 import { Accordion, AccordionTab } from "@/components/accordion/accordion";
-import RPSLSGame from "@/components/RPSLSGame/RPSLSGame";
-import Battleship from "@/components/battleship/battleship";
+import CoinFlipper from "@/components/coins/coinflipper";
 
 import content from "@/app/data/content.json";
+
+// Lazy load game components to reduce initial bundle size
+const RPSLSGame = dynamic(() => import("@/components/RPSLSGame/RPSLSGame"), {
+  loading: () => <p className="text-center">Loading game...</p>,
+});
+
+const Battleship = dynamic(() => import("@/components/battleship/battleship"), {
+  loading: () => <p className="text-center">Loading game...</p>,
+});
 
 export default function CodeChallenges() {
   const { code_challenges } = content;
@@ -24,9 +33,12 @@ export default function CodeChallenges() {
               <Battleship />
             </div>
           </AccordionTab>
-          <AccordionTab title="Challenge 3">
-            <h2 className="text-3xl">Challenge 3</h2>
-            <p>Challenge 3 content</p>
+          <AccordionTab title="Coin Flipper">
+            <div className="flex flex-col items-center text-center">
+              <h2 className="text-3xl">Coin Flipper</h2>
+              <p className="mb-4">Continuously flips coins until three Heads in a row are found, then shows the results.</p>
+              <CoinFlipper />
+            </div>
           </AccordionTab>
         </Accordion>
       </div>

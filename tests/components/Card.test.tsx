@@ -68,7 +68,7 @@ describe("Card Component", () => {
     );
 
     const user = userEvent.setup();
-    const button = screen.getByRole("link", { name: "Open" });
+    const button = screen.getByRole("button", { name: "Open" });
     await user.click(button);
 
     expect(handleClick).toHaveBeenCalled();
