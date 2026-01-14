@@ -41,12 +41,14 @@ export default function Button({
   // If only className is provided (no variant), we skip variant styles entirely
   // and let className handle all styling for maximum flexibility.
   const useVariant = variant !== undefined || className === "";
+  const effectiveVariant = useVariant ? (variant || "primary") : undefined;
+  const effectiveSize = useVariant ? (size || "medium") : undefined;
   
   // Build the final className
   const finalClassName = cleanClassNames(
     useVariant ? baseClasses : "", // Base styles only when using variants
-    useVariant && variant ? variantClasses[variant || "primary"] : "",
-    useVariant && (size || variant) ? sizeClasses[size || "medium"] : "",
+    effectiveVariant ? variantClasses[effectiveVariant] : "",
+    effectiveSize ? sizeClasses[effectiveSize] : "",
     className // Custom className always applied last (can override variants)
   );
 

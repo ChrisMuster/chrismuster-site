@@ -52,8 +52,12 @@ const CoinFlipper: React.FC = () => {
   };
 
   const flipSequence = async () => {
-    // Reset if there are previous results
-    if (results.length > 0) reset();
+    // Clear previous results before starting new sequence
+    if (results.length > 0) {
+      setResults([]);
+      setMessage("");
+      setHighlightFinalThree(false);
+    }
 
     stopFlippingRef.current = false;
     setIsFlipping(true);

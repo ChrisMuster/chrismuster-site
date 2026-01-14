@@ -20,7 +20,10 @@ beforeAll(() => {
     // Suppress known harmless warnings
     if (
       message.includes('Received `true` for a non-boolean attribute `priority`') ||
-      message.includes('not wrapped in act(...)') // Catches all act() warnings
+      // Suppress act() warnings from Next.js loadable components (LoadableComponent, loadable-shared-runtime)
+      // These are library internal state updates that we can't control
+      (message.includes('not wrapped in act(...)') && 
+       (message.includes('LoadableComponent') || message.includes('loadable')))
     ) {
       return;
     }

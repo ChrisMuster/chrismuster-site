@@ -288,7 +288,8 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
               key={index}
               onClick={() => updateIndex(index)}
               className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? "w-4 h-3 bg-[var(--color-blue)]" : "bg-gray-400"}`}
-              title={image.title || ""}
+              title={image.title || `Image ${index + 1}`}
+              aria-label={`Go to ${image.title || `image ${index + 1}`}`}
               data-testid={`modal-dot-${index}`}
             />
           ))}

@@ -44,7 +44,9 @@ export async function POST(req: Request) {
         pass: process.env.SMTP_PASS,
       },
       tls: {
-        // Only disable cert validation in development
+        // Development: Disable cert validation for self-signed/local SMTP servers
+        // Production: Always validate certificates for security
+        // This is safe in dev as we're only testing email functionality locally
         rejectUnauthorized: process.env.NODE_ENV === 'production',
         minVersion: "TLSv1.2",
       }
