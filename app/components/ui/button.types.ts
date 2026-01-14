@@ -7,7 +7,7 @@ export interface ButtonProps {
   // children - Optional but strongly recommended for accessibility
   // Provide text content or ensure aria-label/title is set (e.g., for icon-only/dot buttons)
   children?: ReactNode;
-  onClick?: (event?: React.MouseEvent) => void;
+  onClick?: (event: React.MouseEvent) => void;
   variant?: ButtonVariant;
   size?: ButtonSize;
   disabled?: boolean;
