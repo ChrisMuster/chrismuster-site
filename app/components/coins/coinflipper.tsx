@@ -23,13 +23,12 @@ const CoinFlipper: React.FC = () => {
 
   const { coinflipper } = content.code_challenges;
 
-  const reset = async () => {
+  const reset = () => {
     stopFlippingRef.current = true; // Signal to stop flipping
     setResults([]);
     setMessage("");
     setHighlightFinalThree(false);
     setIsFlipping(false);
-    await new Promise((r) => setTimeout(r, 0));
   };
 
   const handleFlipComplete = (index: number) => {
@@ -53,8 +52,8 @@ const CoinFlipper: React.FC = () => {
   };
 
   const flipSequence = async () => {
-    // Inline reset logic to ensure true clearing
-    if (results.length > 0) await reset();
+    // Reset if there are previous results
+    if (results.length > 0) reset();
 
     stopFlippingRef.current = false;
     setIsFlipping(true);

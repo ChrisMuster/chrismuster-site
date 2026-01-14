@@ -14,12 +14,6 @@ const Coin: React.FC<CoinProps> = ({
 }) => {
   const innerRef = useRef<HTMLDivElement>(null);
   const [animationDone, setAnimationDone] = useState(!shouldAnimate);
-  const [forceRender, setForceRender] = useState(0);
-
-  useEffect(() => {
-    // Trigger a re-render when highlight changes
-    setForceRender((prev) => prev + 1);
-  }, [highlight]);
 
   useEffect(() => {
     if (!shouldAnimate && innerRef.current) {
@@ -39,7 +33,6 @@ const Coin: React.FC<CoinProps> = ({
 
   return (
     <div
-      key={forceRender} // Force re-render when highlight changes
       className="inline-block"
       style={{
         perspective: 1000,

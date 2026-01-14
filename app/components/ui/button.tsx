@@ -36,14 +36,18 @@ export default function Button({
   "data-testid": dataTestId,
 }: ButtonProps) {
   // Determine if we're using variants or just className
+  // Logic: If a variant is explicitly set OR no className is provided,
+  // we use the variant system (which defaults to "primary" with base styles).
+  // If only className is provided (no variant), we skip variant styles entirely
+  // and let className handle all styling for maximum flexibility.
   const useVariant = variant !== undefined || className === "";
   
   // Build the final className
   const finalClassName = cleanClassNames(
-    useVariant ? baseClasses : "",
+    useVariant ? baseClasses : "", // Base styles only when using variants
     useVariant && variant ? variantClasses[variant || "primary"] : "",
     useVariant && (size || variant) ? sizeClasses[size || "medium"] : "",
-    className
+    className // Custom className always applied last (can override variants)
   );
 
   // Render as Link if href is provided (no onClick)

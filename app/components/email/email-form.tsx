@@ -77,7 +77,7 @@ const EmailForm = () => {
           }
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched }) => (
           <Form className="sm:min-w-[320px] flex flex-col gap-4">
             {/* Name Field */}
             <div className="relative">
@@ -92,7 +92,7 @@ const EmailForm = () => {
                   name="name"
                   placeholder={name_placeholder}
                   aria-required="true"
-                  aria-invalid={!!validationSchema.fields.name}
+                  aria-invalid={touched.name && !!errors.name}
                   aria-describedby="name-error"
                   className="w-full pl-10 p-3 border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
@@ -113,7 +113,7 @@ const EmailForm = () => {
                   name="email"
                   placeholder={email_placeholder}
                   aria-required="true"
-                  aria-invalid={!!validationSchema.fields.email}
+                  aria-invalid={touched.email && !!errors.email}
                   aria-describedby="email-error"
                   className="w-full pl-10 p-3 border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
@@ -134,7 +134,7 @@ const EmailForm = () => {
                   name="subject"
                   placeholder={subject_placeholder}
                   aria-required="true"
-                  aria-invalid={!!validationSchema.fields.subject}
+                  aria-invalid={touched.subject && !!errors.subject}
                   aria-describedby="subject-error"
                   className="w-full pl-10 p-3 border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
@@ -154,7 +154,7 @@ const EmailForm = () => {
                 placeholder={message_placeholder}
                 rows={4}
                 aria-required="true"
-                aria-invalid={!!validationSchema.fields.message}
+                aria-invalid={touched.message && !!errors.message}
                 aria-describedby="message-error"
                 className="w-full p-3 text-[var(--color-primary)] border rounded-md focus:outline focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />

@@ -45,8 +45,8 @@ export default function Card({
           <Button
             href={onClick ? undefined : buttonLink}
             onClick={onClick}
-            target={onClick || !external ? undefined : "_blank"}
-            rel={onClick || !external ? undefined : "noopener noreferrer"}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
             className="inline-block bg-[var(--color-blue)] hover:bg-blue-900 text-white px-xxsmall py-2 rounded-md transition cursor-pointer"
           >
             {buttonText}
