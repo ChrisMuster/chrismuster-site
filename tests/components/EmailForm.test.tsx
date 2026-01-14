@@ -61,6 +61,9 @@ describe("EmailForm Component", () => {
   });
 
   it("shows error message on API failure", async () => {
+    // Suppress expected console error for this test
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
     // Override API to force failure
     server.use(
       http.post('/api/send-email', () => {
@@ -79,5 +82,11 @@ describe("EmailForm Component", () => {
     await user.click(screen.getByRole("button", { name: /Send Message/i }));
 
     expect(await screen.findByText(/Error sending email. Please try again/i)).toBeInTheDocument();
+    
+    // Verify error was logged
+    expect(consoleErrorSpy).toHaveBeenCalled();
+    
+    // Restore console.error
+    consoleErrorSpy.mockRestore();
   });
 });

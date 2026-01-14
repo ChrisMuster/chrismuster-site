@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Button from "@/components/ui/button";
 import Coin from "@/components/coins/coins";
 import { Result } from "@/components/coins/coinflipper.types";
+import content from "@/app/data/content.json";
 
 interface CoinRecord {
   result: Result;
@@ -18,8 +19,12 @@ const CoinFlipper: React.FC = () => {
   const [message, setMessage] = useState("");
   const [isFlipping, setIsFlipping] = useState(false);
   const [highlightFinalThree, setHighlightFinalThree] = useState(false);
+  const stopFlippingRef = useRef(false);
+
+  const { coinflipper } = content.code_challenges;
 
   const reset = async () => {
+    stopFlippingRef.current = true; // Signal to stop flipping
     setResults([]);
     setMessage("");
     setHighlightFinalThree(false);
@@ -51,21 +56,25 @@ const CoinFlipper: React.FC = () => {
     // Inline reset logic to ensure true clearing
     if (results.length > 0) await reset();
 
+    stopFlippingRef.current = false;
     setIsFlipping(true);
     const newResults: CoinRecord[] = [];
 
     let streak = 0;
-    while (streak < 3) {
+    while (streak < 3 && !stopFlippingRef.current) {
       const result = getRandomResult();
       streak = result === "heads" ? streak + 1 : 0;
 
       newResults.push({ result, shouldAnimate: true });
       setResults([...newResults]);
 
-      await new Promise((r) => setTimeout(r, 3700));
+      await new Promise((r) => setTimeout(r, 2500));
     }
 
-    setMessage(`It took ${newResults.length} flips to get 3 Heads in a row.`);
+    if (!stopFlippingRef.current) {
+      const resultMessage = coinflipper.result_message.replace("{count}", String(newResults.length));
+      setMessage(resultMessage);
+    }
     setIsFlipping(false);
   };
 
@@ -74,16 +83,27 @@ const CoinFlipper: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center p-6">
-      <div className="flex flex-wrap justify-center mb-6 gap-3">
-        {results.map(({ result, shouldAnimate }, index) => (
+      <div className="flex flex-wrap justify-center mb-6 gap-3 min-h-[160px]">
+        {results.length === 0 ? (
+          // Idle coin - larger and not spinning
           <Coin
-            key={`coin-${index}`}
-            result={result}
-            shouldAnimate={shouldAnimate}
-            onFlipComplete={() => handleFlipComplete(index)}
-            highlight={isFinalThree(index)}
+            result="heads"
+            shouldAnimate={false}
+            onFlipComplete={() => {}}
+            size={150}
           />
-        ))}
+        ) : (
+          // Flipping coins
+          results.map(({ result, shouldAnimate }, index) => (
+            <Coin
+              key={`coin-${index}`}
+              result={result}
+              shouldAnimate={shouldAnimate}
+              onFlipComplete={() => handleFlipComplete(index)}
+              highlight={isFinalThree(index)}
+            />
+          ))
+        )}
       </div>
 
       <div className="flex space-x-4">
@@ -93,16 +113,15 @@ const CoinFlipper: React.FC = () => {
           size="medium" 
           className="w-fit" 
           onClick={flipSequence}>
-          {isFlipping ? "Flipping..." : "Start Flipping"}
+          {isFlipping ? coinflipper.flipping_button : coinflipper.start_button}
         </Button>
 
         <Button
           variant="tertiary"
-          disabled={isFlipping || results.length === 0}
           size="medium"
           className="w-fit"
           onClick={reset}>
-          Reset
+          {isFlipping ? coinflipper.stop_reset_button : coinflipper.reset_button}
         </Button>
       </div>
 

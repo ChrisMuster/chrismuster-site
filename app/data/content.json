@@ -29,7 +29,14 @@
     "content_alt_text": ""
   },
   "code_challenges": {
-    "title": "Code Challenges"
+    "title": "Code Challenges",
+    "coinflipper": {
+      "start_button": "Start Flipping",
+      "flipping_button": "Flipping...",
+      "stop_reset_button": "Stop/Reset",
+      "reset_button": "Reset",
+      "result_message": "It took {count} flips to get 3 Heads in a row."
+    }
   },
   "projects": {
     "title": "Projects",

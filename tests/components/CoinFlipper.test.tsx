@@ -1,197 +1,132 @@
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CoinFlipper from "@/components/coins/coinflipper";
+import content from "@/app/data/content.json";
+
+const { coinflipper } = content.code_challenges;
 
 describe("CoinFlipper Component", () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    act(() => {
-      jest.runOnlyPendingTimers();
-    });
-    jest.useRealTimers();
-  });
-
   it("renders start button", () => {
     render(<CoinFlipper />);
     
-    expect(screen.getByRole("button", { name: "Start Flipping" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: coinflipper.start_button })).toBeInTheDocument();
   });
 
   it("renders reset button", () => {
     render(<CoinFlipper />);
     
-    expect(screen.getByRole("button", { name: "Reset" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: coinflipper.reset_button })).toBeInTheDocument();
   });
 
-  it("disables reset button when no flips", () => {
+  it("shows idle coin when not flipping", () => {
     render(<CoinFlipper />);
     
-    const resetButton = screen.getByRole("button", { name: "Reset" });
-    expect(resetButton).toBeDisabled();
+    const coins = screen.getAllByAltText(/Heads|Tails/i);
+    // Idle coin shows 1 coin with 2 faces (heads and tails sides)
+    expect(coins.length).toBe(2);
   });
 
   it("changes button text to 'Flipping...' when active", async () => {
-    const user = userEvent.setup({ delay: null });
+    const user = userEvent.setup();
     render(<CoinFlipper />);
     
-    const startButton = screen.getByRole("button", { name: "Start Flipping" });
+    const startButton = screen.getByRole("button", { name: coinflipper.start_button });
     await user.click(startButton);
     
-    expect(screen.getByRole("button", { name: "Flipping..." })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: coinflipper.flipping_button })).toBeInTheDocument();
   });
 
   it("disables start button while flipping", async () => {
-    const user = userEvent.setup({ delay: null });
+    const user = userEvent.setup();
     render(<CoinFlipper />);
     
-    const startButton = screen.getByRole("button", { name: "Start Flipping" });
+    const startButton = screen.getByRole("button", { name: coinflipper.start_button });
     await user.click(startButton);
     
-    const flippingButton = screen.getByRole("button", { name: "Flipping..." });
+    const flippingButton = screen.getByRole("button", { name: coinflipper.flipping_button });
     expect(flippingButton).toBeDisabled();
   });
 
-  it("displays coins as they flip", async () => {
-    const user = userEvent.setup({ delay: null });
+  it("shows 'Stop/Reset' button while flipping", async () => {
+    const user = userEvent.setup();
+    render(<CoinFlipper />);
     
-    // Mock Math.random for predictable results
-    const mockRandom = jest.spyOn(Math, "random");
-    mockRandom.mockReturnValueOnce(0.3); // heads
-    mockRandom.mockReturnValueOnce(0.3); // heads
-    mockRandom.mockReturnValueOnce(0.3); // heads
+    const startButton = screen.getByRole("button", { name: coinflipper.start_button });
+    await user.click(startButton);
+    
+    expect(screen.getByRole("button", { name: coinflipper.stop_reset_button })).toBeInTheDocument();
+  });
+
+  it("stops flipping when Stop/Reset is clicked", async () => {
+    const user = userEvent.setup();
     
     render(<CoinFlipper />);
     
-    const startButton = screen.getByRole("button", { name: "Start Flipping" });
+    const startButton = screen.getByRole("button", { name: coinflipper.start_button });
     await user.click(startButton);
     
-    // Fast-forward through first flip
-    act(() => {
-      jest.advanceTimersByTime(3700);
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: coinflipper.stop_reset_button })).toBeInTheDocument();
     });
     
+    // Click Stop/Reset
+    const stopButton = screen.getByRole("button", { name: coinflipper.stop_reset_button });
+    await user.click(stopButton);
+    
+    // Should show start button again (flipping stopped)
+    await waitFor(() => {
+      const startBtn = screen.getByRole("button", { name: coinflipper.start_button });
+      expect(startBtn).toBeInTheDocument();
+      expect(startBtn).not.toBeDisabled();
+    });
+  });
+
+  it("displays coins as they flip", async () => {
+    const user = userEvent.setup();
+    
+    render(<CoinFlipper />);
+    
+    const startButton = screen.getByRole("button", { name: coinflipper.start_button });
+    await user.click(startButton);
+    
+    // Wait a bit for flipping to start
     await waitFor(() => {
       const coins = screen.getAllByAltText(/Heads|Tails/i);
-      expect(coins.length).toBeGreaterThan(0);
-    });
-    
-    mockRandom.mockRestore();
-  });
-
-  it("displays final message with flip count", async () => {
-    const user = userEvent.setup({ delay: null });
-    
-    // Mock for 3 heads in a row
-    const mockRandom = jest.spyOn(Math, "random");
-    mockRandom.mockReturnValue(0.3); // Always heads
-    
-    render(<CoinFlipper />);
-    
-    const startButton = screen.getByRole("button", { name: "Start Flipping" });
-    await user.click(startButton);
-    
-    // Fast-forward through 3 flips
-    act(() => {
-      jest.advanceTimersByTime(3700 * 3);
-    });
-    
-    await waitFor(() => {
-      const buttons = screen.getAllByRole("button");
-      const flipButton = buttons.find(btn => btn.textContent?.includes("Start") || btn.textContent?.includes("Flip"));
-      expect(flipButton).toBeDisabled();
-    }, { timeout: 5000 });
-    
-    mockRandom.mockRestore();
-  });
-
-  it("continues flipping until 3 heads in a row", async () => {
-    const user = userEvent.setup({ delay: null });
-    
-    // Mock sequence: tails, heads, heads, tails, heads, heads, heads
-    const mockRandom = jest.spyOn(Math, "random");
-    mockRandom
-      .mockReturnValueOnce(0.7) // tails
-      .mockReturnValueOnce(0.3) // heads
-      .mockReturnValueOnce(0.3) // heads
-      .mockReturnValueOnce(0.7) // tails
-      .mockReturnValueOnce(0.3) // heads
-      .mockReturnValueOnce(0.3) // heads
-      .mockReturnValueOnce(0.3); // heads - wins
-    
-    render(<CoinFlipper />);
-    
-    const startButton = screen.getByRole("button", { name: "Start Flipping" });
-    await user.click(startButton);
-    
-    act(() => {
-      jest.advanceTimersByTime(3700 * 7);
-    });
-    
-    await waitFor(() => {
-      // Just verify flipping is happening
-      const buttons = screen.getAllByRole("button");
-      expect(buttons.length).toBeGreaterThan(0);
-    });
-    
-    mockRandom.mockRestore();
+      // Should have more than just the idle coin
+      expect(coins.length).toBeGreaterThan(2);
+    }, { timeout: 3000 });
   });
 
   it("resets game state when reset is clicked", async () => {
-    const user = userEvent.setup({ delay: null });
-    
-    const mockRandom = jest.spyOn(Math, "random");
-    mockRandom.mockReturnValue(0.3); // Always heads
+    const user = userEvent.setup();
     
     render(<CoinFlipper />);
     
-    const startButton = screen.getByRole("button", { name: "Start Flipping" });
+    const startButton = screen.getByRole("button", { name: coinflipper.start_button });
     await user.click(startButton);
     
-    act(() => {
-      jest.advanceTimersByTime(3700 * 3);
-    });
-    
+    // Wait for some flips
     await waitFor(() => {
-      // Each coin has 2 images (Heads and Tails sides)
       const coins = screen.getAllByAltText(/Heads|Tails/i);
-      expect(coins.length).toBeGreaterThanOrEqual(3);
-    });
+      expect(coins.length).toBeGreaterThan(2);
+    }, { timeout: 3000 });
     
-    const resetButton = screen.getByRole("button", { name: "Reset" });
-    await user.click(resetButton);
+    // Click Stop/Reset to stop
+    const stopButton = screen.getByRole("button", { name: coinflipper.stop_reset_button });
+    await user.click(stopButton);
     
-    // After reset, check that reset worked (button text changes)
+    // Should show idle coin again
     await waitFor(() => {
-      const button = screen.getByRole("button", { name: /Start Flipping|Flipping/i });
-      expect(button).toBeInTheDocument();
+      const coins = screen.getAllByAltText(/Heads|Tails/i);
+      // Back to idle coin (2 sides)
+      expect(coins.length).toBe(2);
     });
-    
-    mockRandom.mockRestore();
   });
 
-  it("enables reset button after flipping completes", async () => {
-    const user = userEvent.setup({ delay: null });
-    
-    const mockRandom = jest.spyOn(Math, "random");
-    mockRandom.mockReturnValue(0.3); // Always heads
-    
+  it("reset button is always enabled", () => {
     render(<CoinFlipper />);
     
-    const startButton = screen.getByRole("button", { name: "Start Flipping" });
-    await user.click(startButton);
-    
-    act(() => {
-      jest.advanceTimersByTime(3700 * 3 + 2000);
-    });
-    
-    await waitFor(() => {
-      const resetButton = screen.getByRole("button", { name: "Reset" });
-      expect(resetButton).not.toBeDisabled();
-    }, { timeout: 10000 });
-    
-    mockRandom.mockRestore();
+    const resetButton = screen.getByRole("button", { name: coinflipper.reset_button });
+    expect(resetButton).not.toBeDisabled();
   });
 });

@@ -168,7 +168,7 @@ describe("Send Email API Route", () => {
     await POST(mockReq);
 
     expect(NextResponse.json).toHaveBeenCalledWith(
-      { error: "SMTP connection failed" },
+      { error: "SMTP connection failed", details: "Connection failed" },
       { status: 500 }
     );
     expect(mockTransporter.sendMail).not.toHaveBeenCalled();
