@@ -11,6 +11,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
+import Button from "@/components/ui/button";
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -141,25 +142,27 @@ export default function PdfViewerClient({
       {/* Zoom + Actions */}
       <div className="flex flex-wrap justify-between w-full mb-3 sm:gap-4 gap-2">
         <div className="flex items-center sm:gap-2 gap-1">
-          <button
+          <Button
             onClick={() => setScale((prev) => Math.max(prev - 0.2, 0.5))}
             className="p-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded-md"
+            aria-label="Zoom Out"
             title="Zoom Out"
           >
             <ZoomOut className="w-5 h-5" />
-          </button>
+          </Button>
 
           <span className="hidden md:inline text-lg font-semibold text-[var(--color-primary)]">
             Zoom
           </span>
 
-          <button
+          <Button
             onClick={() => setScale((prev) => Math.min(prev + 0.2, 2.0))}
             className="p-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded-md"
+            aria-label="Zoom In"
             title="Zoom In"
           >
             <ZoomIn className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
 
         <div className="flex sm:gap-2 gap-1">
@@ -173,14 +176,15 @@ export default function PdfViewerClient({
             <span className="hidden md:inline">Download</span>
           </a>
 
-          <button
+          <Button
             onClick={handlePrint}
             className="sm:px-3 sm:py-2 p-2 bg-gray-700 hover:bg-gray-900 text-white rounded-md flex items-center gap-1"
+            aria-label="Print"
             title="Print"
           >
             <Printer className="w-5 h-5" />
             <span className="hidden md:inline">Print</span>
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -195,28 +199,30 @@ export default function PdfViewerClient({
 
       {/* Pagination */}
       <div className="flex justify-center items-center w-full mt-3 gap-2 sm:gap-4">
-        <button
+        <Button
           onClick={() => handlePageChange(Math.max(pageNumber - 1, 1))}
           disabled={pageNumber <= 1}
           className="p-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded-md disabled:opacity-50"
+          aria-label="Previous page"
         >
           <ChevronLeft className="w-5 h-5" />
-        </button>
+        </Button>
 
         <p className="text-sm sm:text-lg">
           <span className="hidden sm:inline">Page</span> {pageNumber} of{" "}
           {numPages}
         </p>
 
-        <button
+        <Button
           onClick={() =>
             handlePageChange(Math.min(pageNumber + 1, numPages || 1))
           }
           disabled={pageNumber >= (numPages || 1)}
           className="p-2 bg-[var(--color-blue)] hover:bg-blue-900 text-white rounded-md disabled:opacity-50"
+          aria-label="Next page"
         >
           <ChevronRight className="w-5 h-5" />
-        </button>
+        </Button>
       </div>
 
       <Link

@@ -1,6 +1,6 @@
 import { CardProps } from "@/components/card/card.types";
 import Image from "next/image";
-import Link from "next/link";
+import Button from "@/components/ui/button";
 
 import { cleanClassNames } from "@/utils/utils";
 
@@ -15,15 +15,8 @@ export default function Card({
   onClick,
   shadow,
   className = "",
+  external = true,
 }: CardProps) {
-  // Default click handler: prevents navigation only if onClick is passed
-  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (onClick) {
-      event.preventDefault(); // Stop the link navigation
-      onClick(); // Execute the provided function
-    }
-  };
-
   const shadowClass = shadow === "light" ? "shadow-light" : shadow === "dark" ? "shadow-dark" : "";
 
   return (
@@ -47,17 +40,17 @@ export default function Card({
           <p className="mb-xxsmall">{text}</p>
         </div>
 
-        {/* Button: Uses Link but prevents default if onClick is passed */}
+        {/* Button: Uses Button component with href or onClick */}
         <div className="flex justify-start mt-auto">
-          <Link
-            href={buttonLink}
-            onClick={handleClick}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Button
+            href={onClick ? undefined : buttonLink}
+            onClick={onClick}
+            target={onClick || !external ? undefined : "_blank"}
+            rel={onClick || !external ? undefined : "noopener noreferrer"}
             className="inline-block bg-[var(--color-blue)] hover:bg-blue-900 text-white px-xxsmall py-2 rounded-md transition cursor-pointer"
           >
             {buttonText}
-          </Link>
+          </Button>
         </div>
       </div>
     </div>

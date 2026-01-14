@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Mail, User, MessageSquare, Send } from "lucide-react";
 import { EmailFormValues } from "@/components/email/email-form.types";
+import Button from "@/components/ui/button";
 import content from "@/app/data/content.json";
 
 const EmailForm = () => {
@@ -65,7 +66,10 @@ const EmailForm = () => {
               setFormStatus("success");
               resetForm();
             } else {
-              throw new Error("Failed to send email");
+              // Log the actual error from the server
+              const errorData = await response.json().catch(() => ({}));
+              console.error("Server error:", response.status, errorData);
+              throw new Error(errorData.error || `Server error: ${response.status}`);
             }
           } catch (error) {
             console.error("Error sending email:", error);
@@ -158,14 +162,15 @@ const EmailForm = () => {
             </div>
 
             {/* Submit Button */}
-            <button
+            <Button
+              variant="primary"
               type="submit"
               disabled={isSubmitting}
-              className="bg-[var(--color-blue)] text-white flex items-center justify-center gap-2 py-3 rounded-md hover:bg-blue-900 transition focus-visible:outline-none"
+              className="flex items-center justify-center gap-2"
             >
               <Send className="w-5 h-5" />
               {isSubmitting ? sending_text : button_text}
-            </button>
+            </Button>
 
             {/* Success / Error Message */}
             {formStatus === "success" && (

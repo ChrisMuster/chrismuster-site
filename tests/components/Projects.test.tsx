@@ -68,7 +68,7 @@ describe("Projects Page Component", () => {
     expect(modal).toBeInTheDocument();
     
     // Close modal
-    const closeButton = screen.getByRole("button", { name: /×/ });
+    const closeButton = screen.getByRole("button", { name: /close modal/i });
     await user.click(closeButton);
     
     // Modal should be hidden (not in DOM or hidden)

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Button from "@/components/ui/button";
 import Coin from "@/components/coins/coins";
 import { Result } from "@/components/coins/coinflipper.types";
 
@@ -86,21 +87,23 @@ const CoinFlipper: React.FC = () => {
       </div>
 
       <div className="flex space-x-4">
-        <button
-          disabled={isFlipping}
-          onClick={flipSequence}
-          className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
-        >
+        <Button 
+          variant="primary" 
+          disabled={isFlipping} 
+          size="medium" 
+          className="w-fit" 
+          onClick={flipSequence}>
           {isFlipping ? "Flipping..." : "Start Flipping"}
-        </button>
+        </Button>
 
-        <button
-          onClick={reset}
-          className="px-4 py-2 bg-gray-300 rounded"
+        <Button
+          variant="tertiary"
           disabled={isFlipping || results.length === 0}
-        >
+          size="medium"
+          className="w-fit"
+          onClick={reset}>
           Reset
-        </button>
+        </Button>
       </div>
 
       {message && (
