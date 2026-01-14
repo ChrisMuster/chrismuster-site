@@ -13,8 +13,8 @@ describe("Contact Page Component", () => {
   it("renders tabs", () => {
     render(<Contact />);
     
-    const buttons = screen.getAllByRole("button");
-    expect(buttons.length).toBeGreaterThanOrEqual(3);
+    const tabs = screen.getAllByRole("tab");
+    expect(tabs.length).toBeGreaterThanOrEqual(3);
   });
 
   it("shows resume tab content by default", () => {
@@ -29,8 +29,8 @@ describe("Contact Page Component", () => {
     const user = userEvent.setup();
     render(<Contact />);
     
-    const buttons = screen.getAllByRole("button");
-    const emailTab = buttons.find(btn => btn.textContent?.includes("Email") || btn.textContent?.includes("email"));
+    const tabs = screen.getAllByRole("tab");
+    const emailTab = tabs.find(btn => btn.textContent?.includes("Email") || btn.textContent?.includes("email"));
     
     if (emailTab) {
       await user.click(emailTab);
@@ -44,8 +44,8 @@ describe("Contact Page Component", () => {
     const user = userEvent.setup();
     render(<Contact />);
     
-    const buttons = screen.getAllByRole("button");
-    const emailTab = buttons.find(btn => btn.textContent?.includes("Email") || btn.textContent?.includes("email"));
+    const tabs = screen.getAllByRole("tab");
+    const emailTab = tabs.find(btn => btn.textContent?.includes("Email") || btn.textContent?.includes("email"));
     
     if (emailTab) {
       await user.click(emailTab);
@@ -60,8 +60,8 @@ describe("Contact Page Component", () => {
     const user = userEvent.setup();
     render(<Contact />);
     
-    const buttons = screen.getAllByRole("button");
-    const linkedInTab = buttons.find(btn => btn.textContent?.includes("LinkedIn") || btn.textContent?.includes("linkedin"));
+    const tabs = screen.getAllByRole("tab");
+    const linkedInTab = tabs.find(btn => btn.textContent?.includes("LinkedIn") || btn.textContent?.includes("linkedin"));
     
     if (linkedInTab) {
       await user.click(linkedInTab);
@@ -74,17 +74,17 @@ describe("Contact Page Component", () => {
     const user = userEvent.setup();
     render(<Contact />);
     
-    const buttons = screen.getAllByRole("button");
+    const tabs = screen.getAllByRole("tab");
     
     // Click second tab
-    await user.click(buttons[1]);
+    await user.click(tabs[1]);
     // Just verify the tab system is functional
-    expect(buttons[1]).toBeInTheDocument();
+    expect(tabs[1]).toBeInTheDocument();
     
     // Click back to first tab
-    await user.click(buttons[0]);
+    await user.click(tabs[0]);
     // Verify tabs are functional
-    expect(buttons[0]).toBeInTheDocument();
+    expect(tabs[0]).toBeInTheDocument();
   });
 
   it("renders PdfViewer component in resume tab", () => {

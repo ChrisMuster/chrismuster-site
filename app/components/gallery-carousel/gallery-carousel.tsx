@@ -248,7 +248,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
         >
           <Button
             onClick={(e) => {
-              e?.stopPropagation();
+              e.stopPropagation();
               showPrevImage();
             }}
             className="absolute left-2 top-1/2 -translate-y-1/2 text-[var(--color-primary)] hover:text-[var(--color-blue)] transition-colors hidden md:block z-50"
@@ -271,7 +271,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
 
           <Button
             onClick={(e) => {
-              e?.stopPropagation();
+              e.stopPropagation();
               showNextImage();
             }}
             className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--color-primary)] hover:text-[var(--color-blue)] transition-colors hidden md:block z-50"
