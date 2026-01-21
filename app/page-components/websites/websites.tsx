@@ -10,7 +10,7 @@ export default function Websites() {
 
   return (
     <Section id="websites">
-      <h2 className="text-4xl my-small text-center">{websites.title}</h2>
+      <h2 className="text-4xl my-8 text-center">{websites.title}</h2>
       <div className="w-full bg-[var(--background)] h-full">
         <Grid gap="medium" sm={1} md={2} xl={3}>
           <Card

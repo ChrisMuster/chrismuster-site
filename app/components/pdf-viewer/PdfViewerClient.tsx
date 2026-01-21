@@ -134,7 +134,7 @@ export default function PdfViewerClient({
     <div
       id="pdfTop"
       className={cleanClassNames(
-        "flex flex-col items-center w-full max-w-4xl mx-auto p-small bg-white",
+        "flex flex-col items-center w-full max-w-4xl mx-auto p-8 bg-white",
         pdfShadow,
         pdfBorder
       )}

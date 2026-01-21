@@ -25,23 +25,23 @@ export default function Projects() {
 
   return (
     <Section id="projects">
-      <h2 className="text-4xl my-small text-center">{projects.title}</h2>
+      <h2 className="text-4xl my-8 text-center">{projects.title}</h2>
       <div className="w-full bg-[var(--background)] h-full">
-        <div className="p-small max-w-5xl mx-auto">
-          <h1 className="text-3xl mb-xsmall text-center">{projects.gallery.title}</h1>
+        <div className="p-8 max-w-5xl mx-auto">
+          <h1 className="text-3xl mb-6 text-center">{projects.gallery.title}</h1>
           <GalleryCarousel images={projects.gallery.images} />
         </div>
 
         <Divider width="w-2/3" height="h-1" />
 
-        <div className="p-small max-w-5xl mx-auto flex flex-col justify-center">
-          <h1 className="text-3xl mb-xsmall text-center">{projects.modals.title}</h1>
+        <div className="p-8 max-w-5xl mx-auto flex flex-col justify-center">
+          <h1 className="text-3xl mb-6 text-center">{projects.modals.title}</h1>
 
           <div className="flex flex-col md:flex-row justify-around">
             <div className="flex flex-col">
-              <p className="mb-xxsmall">{projects.modals.button_label}</p>
+              <p className="mb-4">{projects.modals.button_label}</p>
 
-              <Button variant="primary" size="medium" className="w-fit mb-small" onClick={handleOpenModal}>
+              <Button variant="primary" size="medium" className="w-fit mb-8" onClick={handleOpenModal}>
                 {projects.modals.button_text}
               </ Button>
             </div>
@@ -57,7 +57,7 @@ export default function Projects() {
           </div>
 
           <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-            <div className="w-full max-w-[500px] p-xxsmall text-[var(--color-primary)]">
+            <div className="w-full max-w-[500px] p-4 text-[var(--color-primary)]">
               <h2 className="text-lg font-bold">{projects.modals.modal_title}</h2>
               <p>{projects.modals.modal_text_1}</p>
               <p>{projects.modals.modal_text_2}</p>

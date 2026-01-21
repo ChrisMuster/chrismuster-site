@@ -33,11 +33,11 @@ export default function Card({
       </div>
 
       {/* Card Content */}
-      <div className="p-xsmall flex flex-col flex-grow justify-between">
+      <div className="p-6 flex flex-col flex-grow justify-between">
         <div>
           {subtitle && <p className="text-sm mb-1">{subtitle}</p>}
           <h3 className="text-xl font-bold mb-2">{title}</h3>
-          <p className="mb-xxsmall">{text}</p>
+          <p className="mb-4">{text}</p>
         </div>
 
         {/* Button: Uses Button component with href or onClick */}
@@ -47,7 +47,7 @@ export default function Card({
             onClick={onClick}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
-            className="inline-block bg-[var(--color-blue)] hover:bg-blue-900 text-white px-xxsmall py-2 rounded-md transition cursor-pointer"
+            className="inline-block bg-[var(--color-blue)] hover:bg-blue-900 text-white px-4 py-2 rounded-md transition cursor-pointer"
           >
             {buttonText}
           </Button>

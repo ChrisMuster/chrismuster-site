@@ -9,7 +9,7 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
           role="tab"
           aria-selected={activeTab === tab.id}
           aria-controls={`tabpanel-${tab.id}`}
-          className={`relative px-xxsmall sm:px-xsmall py-3 sm:text-lg font-semibold transition-colors duration-200 
+          className={`relative px-4 sm:px-6 py-3 sm:text-lg font-semibold transition-colors duration-200 
             ${activeTab === tab.id
             ? "border border-gray-300 border-b-[var(--background)] bg-[var(--background)] text-[var(--foreground)] z-20"
             : "border-transparent text-[var(--foreground)] hover:text-[var(--color-primary)] hover:bg-gray-100 z-10"

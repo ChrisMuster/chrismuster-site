@@ -6,7 +6,7 @@ const Divider: React.FC<DividerProps> = ({
   height = "h-4",
   color = "bg-[var(--color-primary)]",
   margin = "my-6",
-  paddingX = "px-xsmall md:px-medium lg:px-xlarge xl:px-xxlarge",
+  paddingX = "px-6 md:px-12 lg:px-24 xl:px-32",
   className = "",
 }) => {
   return (

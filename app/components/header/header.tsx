@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full bg-[var(--background)] shadow-md z-50">
       <div className="max-w-[1425px] mx-auto flex justify-between items-center">
-        <div className="flex w-full justify-between items-center p-xxsmall">
+        <div className="flex w-full justify-between items-center p-4">
           {/* Logo */}
           <div className="flex items-center">
             <Image 
@@ -64,7 +64,7 @@ export default function Header() {
                 scrollToSection(section.toLowerCase().replace(" ", "-"));
                 setMenuOpen(false); // Close menu after clicking
               }}
-              className="block w-full text-left p-xxsmall hover:text-[var(--color-blue)] hover:bg-gray-100"
+              className="block w-full text-left p-4 hover:text-[var(--color-blue)] hover:bg-gray-100"
             >
               {section}
             </button>

@@ -23,7 +23,7 @@ export const AccordionTab = memo(function AccordionTab({ title, children, openBy
       {/* Tab Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="accordion-tab-btn text-[var(--color-primary)] w-full flex justify-between items-center p-xxsmall bg-gray-200 hover:bg-gray-300 transition"
+        className="accordion-tab-btn text-[var(--color-primary)] w-full flex justify-between items-center p-4 bg-gray-200 hover:bg-gray-300 transition"
       >
         <span className="font-semibold">{title}</span>
         <Image
@@ -38,7 +38,7 @@ export const AccordionTab = memo(function AccordionTab({ title, children, openBy
       {/* Tab Content */}
       <div
         data-testid="accordion-content"
-        className={`accordion-tab-content overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[fit] p-xxsmall border border-gray-200" : "max-h-0 p-none"}`}
+        className={`accordion-tab-content overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[fit] p-4 border border-gray-200" : "max-h-0 p-0"}`}
       >
         {children}
       </div>

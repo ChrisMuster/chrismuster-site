@@ -28,28 +28,28 @@ export default function Contact() {
 
   return (
     <Section id="contact">
-      <h2 className="text-4xl my-small text-center">{contact.title}</h2>
-      <div className="tabwrapper p-none">
+      <h2 className="text-4xl my-8 text-center">{contact.title}</h2>
+      <div className="tabwrapper p-0">
         <TabsSection tabs={contact.tabs} activeTab={activeTab} onTabChange={setActiveTab}>
           {activeTab === "tab1" && (
-            <div className="py-small">
+            <div className="py-8">
               {tab1_title && (
-                <h1 className="text-3xl text-center mb-medium">{tab1_title}</h1>
+                <h1 className="text-3xl text-center mb-12">{tab1_title}</h1>
               )}
               <PdfViewer fileUrl={pdfFile_url} linkText={pdfLinkText} />
             </div>
           )}
           {activeTab === "tab2" && (
-            <div className="flex flex-col max-w-5xl p-xsmall mx-auto my-xsmall items-center">
-              <h1 className="text-3xl mx-auto mb-xxsmall">{tab2_title}</h1>
-              <p className="mb-xxsmall">
+            <div className="flex flex-col max-w-5xl p-6 mx-auto my-6 items-center">
+              <h1 className="text-3xl mx-auto mb-4">{tab2_title}</h1>
+              <p className="mb-4">
                 {tab2_text}
               </p>
               <EmailForm />
             </div>
           )}
           {activeTab === "tab3" && (
-            <div className="p-small"><p>{tab3_text}</p></div>
+            <div className="p-8"><p>{tab3_text}</p></div>
           )}
         </TabsSection>
       </div>

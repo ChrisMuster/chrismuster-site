@@ -31,8 +31,8 @@ describe("Section Component", () => {
     );
     
     const section = container.firstChild as HTMLElement;
-    expect(section.className).toContain("p-xsmall");
-    expect(section.className).toContain("md:p-medium");
+    expect(section.className).toContain("p-6");
+    expect(section.className).toContain("md:p-12");
   });
 
   it("applies fullWidth class when fullWidth is true", () => {
@@ -44,7 +44,7 @@ describe("Section Component", () => {
     
     const section = container.firstChild as HTMLElement;
     expect(section).toHaveClass("w-full");
-    expect(section.className).not.toContain("p-xsmall");
+    expect(section.className).not.toContain("p-6");
   });
 
   it("applies default spacing of none", () => {
@@ -54,30 +54,30 @@ describe("Section Component", () => {
       </Section>
     );
     
-    expect(container.firstChild).toHaveClass("mb-none");
+    expect(container.firstChild).toHaveClass("mb-0");
   });
 
   it("applies spacing options correctly", () => {
     const { container: xxsmall } = render(<Section spacing="xxsmall"><p>1</p></Section>);
-    expect(xxsmall.firstChild).toHaveClass("mb-xxsmall");
+    expect(xxsmall.firstChild).toHaveClass("mb-4");
 
     const { container: xsmall } = render(<Section spacing="xsmall"><p>2</p></Section>);
-    expect(xsmall.firstChild).toHaveClass("mb-xsmall");
+    expect(xsmall.firstChild).toHaveClass("mb-6");
 
     const { container: small } = render(<Section spacing="small"><p>3</p></Section>);
-    expect(small.firstChild).toHaveClass("mb-small");
+    expect(small.firstChild).toHaveClass("mb-8");
 
     const { container: medium } = render(<Section spacing="medium"><p>4</p></Section>);
-    expect(medium.firstChild).toHaveClass("mb-medium");
+    expect(medium.firstChild).toHaveClass("mb-12");
 
     const { container: large } = render(<Section spacing="large"><p>5</p></Section>);
-    expect(large.firstChild).toHaveClass("mb-large");
+    expect(large.firstChild).toHaveClass("mb-16");
 
     const { container: xlarge } = render(<Section spacing="xlarge"><p>6</p></Section>);
-    expect(xlarge.firstChild).toHaveClass("mb-xlarge");
+    expect(xlarge.firstChild).toHaveClass("mb-24");
 
     const { container: xxlarge } = render(<Section spacing="xxlarge"><p>7</p></Section>);
-    expect(xxlarge.firstChild).toHaveClass("mb-xxlarge");
+    expect(xxlarge.firstChild).toHaveClass("mb-32");
   });
 
   it("applies background color when provided", () => {
@@ -116,8 +116,41 @@ describe("Section Component", () => {
     const section = container.firstChild as HTMLElement;
     expect(section).toHaveAttribute("id", "test");
     expect(section).toHaveClass("w-full");
-    expect(section).toHaveClass("mb-large");
+    expect(section).toHaveClass("mb-16");
     expect(section).toHaveClass("bg-gray-100");
     expect(section).toHaveClass("custom");
+  });
+
+  it("applies default minHeight of auto", () => {
+    const { container } = render(
+      <Section>
+        <p>Content</p>
+      </Section>
+    );
+    
+    const section = container.firstChild as HTMLElement;
+    expect(section.className).not.toContain("min-h-screen");
+  });
+
+  it("applies min-h-screen when minHeight is screen", () => {
+    const { container } = render(
+      <Section minHeight="screen">
+        <p>Content</p>
+      </Section>
+    );
+    
+    const section = container.firstChild as HTMLElement;
+    expect(section).toHaveClass("min-h-screen");
+  });
+
+  it("does not apply min-h-screen when minHeight is auto", () => {
+    const { container } = render(
+      <Section minHeight="auto">
+        <p>Content</p>
+      </Section>
+    );
+    
+    const section = container.firstChild as HTMLElement;
+    expect(section.className).not.toContain("min-h-screen");
   });
 });

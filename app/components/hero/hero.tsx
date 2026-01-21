@@ -41,13 +41,13 @@ export default function Hero({
         {/* Overlay Content (Desktop) */}
         <div
           className={cleanClassNames(
-            "absolute inset-0 flex h-full items-center lg:px-xlarge xl:px-xxlarge xxl:max-w-[1425px] xxl:mx-auto",
+            "absolute inset-0 flex h-full items-center lg:px-24 xl:px-32 xxl:max-w-[1425px] xxl:mx-auto",
             overlayAlignmentClasses[overlayAlignment]
           )}
         >
           <div
             className={cleanClassNames(
-              "bg-black bg-opacity-50 text-white lg:p-small xl:p-medium rounded-lg max-w-3xl hidden lg:flex flex-col",
+              "bg-black bg-opacity-50 text-white lg:p-8 xl:p-12 rounded-lg max-w-3xl hidden lg:flex flex-col",
               textAlignmentClasses[textAlignment]
             )}
           >
@@ -59,7 +59,7 @@ export default function Hero({
       {/* Content below the image on smaller screens */}
       <div
         className={cleanClassNames(
-          "lg:hidden px-xsmall md:px-medium pt-small pb-none flex flex-col",
+          "lg:hidden px-6 md:px-12 pt-8 pb-0 flex flex-col",
           textAlignmentClasses[textAlignment]
         )}
       >
