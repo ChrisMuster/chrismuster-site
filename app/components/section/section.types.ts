@@ -7,4 +7,5 @@ export interface SectionProps {
   className?: string; // Allow additional classes
   spacing?: "none" | "xxsmall" | "xsmall" | "small" | "medium" | "large" | "xlarge" | "xxlarge";
   bgColor?: string; // Optional prop for background color
+  minHeight?: "screen" | "auto"; // Optional prop for minimum height, defaults to "auto"
 }

@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className = ""
       onClick={onClose}
     >
       <div
-        className={cleanClassNames("modal-content bg-white rounded-lg p-xxsmall shadow-lg relative", className)}
+        className={cleanClassNames("modal-content bg-white rounded-lg p-4 shadow-lg relative", className)}
         onClick={(e) => e.stopPropagation()}
       >
         <Button

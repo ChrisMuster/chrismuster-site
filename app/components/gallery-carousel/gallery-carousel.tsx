@@ -116,7 +116,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
   return (
     <div className={cleanClassNames("gallery-carousel w-full flex flex-col items-center", className)}>
       {/* Navigation Controls (Only on Medium Screens & Above) */}
-      <div className="flex items-center w-full max-w-3xl justify-between mt-xxsmall">
+      <div className="flex items-center w-full max-w-3xl justify-between mt-4">
         <Button
           onClick={showPrevImage}
           className="hidden md:block hover:text-[var(--color-blue)] transition-colors"
@@ -180,7 +180,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
       )}
 
       {/* Thumbnails */}
-      <div className="thumbnails relative mt-xxsmall w-full max-w-3xl overflow-hidden flex items-center justify-center">
+      <div className="thumbnails relative mt-4 w-full max-w-3xl overflow-hidden flex items-center justify-center">
         <Button
           onClick={() => scrollThumbnails("left")}
           disabled={scrollIndex === 0}
@@ -243,7 +243,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
         <div 
           {...bindDragSwipe()} 
           ref={modalImageRef}
-          className="relative flex justify-center items-center p-xsmall w-[95vw] max-w-[1100px] min-h-[500px]"
+          className="relative flex justify-center items-center p-6 w-[95vw] max-w-[1100px] min-h-[500px]"
           style={{ touchAction: "none", userSelect: "none", pointerEvents: "auto" }}
         >
           <Button
@@ -282,7 +282,7 @@ export default function GalleryCarousel({ images, showCaptions = false, classNam
           </Button>
         </div>
         {/* Dot Navigation */}
-        <div className="flex justify-center mt-xxsmall space-x-2 pb-xxsmall">
+        <div className="flex justify-center mt-4 space-x-2 pb-4">
           {images.map((image, index) => (
             <Button
               key={index}

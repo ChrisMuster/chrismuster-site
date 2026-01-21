@@ -50,7 +50,7 @@ const EmailForm = () => {
   });
 
   return (
-    <div className="max-w-lg mx-auto p-xsmall bg-white text-[var(--color-primary)] rounded-lg">
+    <div className="max-w-lg mx-auto p-6 bg-white text-[var(--color-primary)] rounded-lg">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -174,10 +174,10 @@ const EmailForm = () => {
 
             {/* Success / Error Message */}
             {formStatus === "success" && (
-              <p className="text-green-600 mt-xxsmall">{success_text}</p>
+              <p className="text-green-600 mt-4">{success_text}</p>
             )}
             {formStatus === "error" && (
-              <p className="text-red-600 mt-xxsmall">{fail_text}</p>
+              <p className="text-red-600 mt-4">{fail_text}</p>
             )}
           </Form>
         )}

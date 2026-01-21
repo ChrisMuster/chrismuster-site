@@ -96,9 +96,9 @@ export default function RPSLSGame() {
   };
 
   return (
-    <div className="rpsls-game text-center p-xsmall">
-      <h1 className="text-2xl font-bold mb-xxsmall">Rock, Paper, Scissors, Lizard, Spock</h1>
-      <div className="flex justify-center flex-wrap mb-xxsmall">
+    <div className="rpsls-game text-center p-6">
+      <h1 className="text-2xl font-bold mb-4">Rock, Paper, Scissors, Lizard, Spock</h1>
+      <div className="flex justify-center flex-wrap mb-4">
         {choices.map((choice) => (
           <button
             key={choice}
@@ -118,11 +118,11 @@ export default function RPSLSGame() {
 
       {/* Show countdown first, then switch to results */}
       {countdown !== null && (
-        <h2 className="text-6xl font-bold mt-xxsmall animate-pulse">{countdown}</h2>
+        <h2 className="text-6xl font-bold mt-4 animate-pulse">{countdown}</h2>
       )}
 
       {showResult && userChoice && computerChoice && (
-        <div className="mt-xxsmall">
+        <div className="mt-4">
           <p className="text-lg">You chose: <strong>{capitalize(userChoice)}</strong></p>
           <p className="text-lg">Computer chose: <strong>{capitalize(computerChoice)}</strong></p>
           <h2 className="text-xl font-semibold">{result}</h2>

@@ -19,7 +19,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-gray-900 text-white text-center py-xsmall">
+    <footer className="bg-gray-900 text-white text-center py-6">
       <div className="container mx-auto flex flex-col items-center">
         {/* Logo */}
         <Image 
@@ -30,7 +30,7 @@ export default function Footer() {
           height={200} />
 
         {/* Copyright Message */}
-        <p className="mt-xxsmall text-sm">
+        <p className="mt-4 text-sm">
           &copy; {year} {footer.copyright}
         </p>
       </div>

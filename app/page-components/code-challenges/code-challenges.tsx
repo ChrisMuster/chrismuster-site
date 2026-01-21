@@ -20,7 +20,7 @@ export default function CodeChallenges() {
 
   return (
     <Section id="code-challenges">
-      <h2 className="text-4xl my-small text-center">{code_challenges.title}</h2>
+      <h2 className="text-4xl my-8 text-center">{code_challenges.title}</h2>
       <div className="w-full bg-[var(--background)] h-auto">
         <Accordion>
           <AccordionTab title="Rock, Paper, Scissors, Lizard, Spock">

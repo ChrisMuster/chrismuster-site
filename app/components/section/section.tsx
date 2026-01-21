@@ -9,23 +9,26 @@ export default function Section({
   className = "", 
   spacing = "none", // Default spacing is "none" and applies to margin-bottom
   bgColor,
+  minHeight = "auto", // Default to auto height
 }: SectionProps) {
   
   const mbSpacingClasses: Record<string, string> = {
-    none: "mb-none",
-    xxsmall: "mb-xxsmall",
-    xsmall: "mb-xsmall",
-    small: "mb-small",
-    medium: "mb-medium",
-    large: "mb-large",
-    xlarge: "mb-xlarge",
-    xxlarge: "mb-xxlarge",
+    none: "mb-0",
+    xxsmall: "mb-4",
+    xsmall: "mb-6",
+    small: "mb-8",
+    medium: "mb-12",
+    large: "mb-16",
+    xlarge: "mb-24",
+    xxlarge: "mb-32",
   };
+
+  const minHeightClass = minHeight === "screen" ? "min-h-screen" : "";
 
   return (
     <section
       id={id}
-      className={cleanClassNames("h-auto min-h-screen flex flex-col", fullWidth ? "w-full" : "p-xsmall md:p-medium lg:px-xlarge xl:px-xxlarge xxl:max-w-[1425px] xxl:mx-auto", mbSpacingClasses[spacing], bgColor ? bgColor : "", className)}
+      className={cleanClassNames("h-auto flex flex-col", minHeightClass, fullWidth ? "w-full" : "p-6 md:p-12 lg:px-24 xl:px-32 xxl:max-w-[1425px] xxl:mx-auto", mbSpacingClasses[spacing], bgColor ? bgColor : "", className)}
     >
       {children}
     </section>
