@@ -14,17 +14,22 @@ interface CoinRecord {
 const getRandomResult = (): Result =>
   Math.random() < 0.5 ? "heads" : "tails";
 
+const ANIMATION_DURATION_MS = 2500;
+const TARGET_HEADS = 3;
+
 const CoinFlipper: React.FC = () => {
   const [results, setResults] = useState<CoinRecord[]>([]);
   const [message, setMessage] = useState("");
   const [isFlipping, setIsFlipping] = useState(false);
   const [highlightFinalThree, setHighlightFinalThree] = useState(false);
+  const [sequenceKey, setSequenceKey] = useState(0);
   const stopFlippingRef = useRef(false);
+  const activeSequenceRef = useRef(0);
 
   const { coinflipper } = content.code_challenges;
 
   const reset = () => {
-    stopFlippingRef.current = true; // Signal to stop flipping
+    stopFlippingRef.current = true;
     setResults([]);
     setMessage("");
     setHighlightFinalThree(false);
@@ -38,8 +43,8 @@ const CoinFlipper: React.FC = () => {
       );
 
       // Check for final 3 completed heads in updated results
-      const lastThree = updated.slice(-3);
-      const allHeads = lastThree.length === 3 && lastThree.every((r) => r.result === "heads");
+      const lastThree = updated.slice(-TARGET_HEADS);
+      const allHeads = lastThree.length === TARGET_HEADS && lastThree.every((r) => r.result === "heads");
       const allDone = lastThree.every((r) => !r.shouldAnimate);
 
       // Only if all conditions met
@@ -52,42 +57,53 @@ const CoinFlipper: React.FC = () => {
   };
 
   const flipSequence = async () => {
-    // Clear previous results before starting new sequence
-    if (results.length > 0) {
-      setResults([]);
-      setMessage("");
-      setHighlightFinalThree(false);
-    }
-
     stopFlippingRef.current = false;
+    const mySequenceId = sequenceKey + 1;
+    setSequenceKey(mySequenceId);
+    activeSequenceRef.current = mySequenceId;
     setIsFlipping(true);
+    setResults([]);
+    setMessage("");
+    setHighlightFinalThree(false);
+    
     const newResults: CoinRecord[] = [];
 
     let streak = 0;
-    while (streak < 3 && !stopFlippingRef.current) {
+    while (streak < TARGET_HEADS && !stopFlippingRef.current) {
       const result = getRandomResult();
       streak = result === "heads" ? streak + 1 : 0;
 
       newResults.push({ result, shouldAnimate: true });
-      setResults([...newResults]);
+      
+      if (!stopFlippingRef.current && activeSequenceRef.current === mySequenceId) {
+        setResults([...newResults]);
+      }
 
-      await new Promise((r) => setTimeout(r, 2500));
+      // Wait before next flip, not after
+      if (streak < TARGET_HEADS && !stopFlippingRef.current) {
+        await new Promise((r) => setTimeout(r, ANIMATION_DURATION_MS));
+      }
     }
 
-    if (!stopFlippingRef.current) {
+    // Wait for final coin animation to complete
+    if (!stopFlippingRef.current && activeSequenceRef.current === mySequenceId) {
+      await new Promise((r) => setTimeout(r, ANIMATION_DURATION_MS));
+    }
+
+    if (!stopFlippingRef.current && activeSequenceRef.current === mySequenceId) {
       const resultMessage = coinflipper.result_message.replace("{count}", String(newResults.length));
       setMessage(resultMessage);
+      setIsFlipping(false);
     }
-    setIsFlipping(false);
   };
 
   const isFinalThree = (index: number) =>
-    highlightFinalThree && index >= results.length - 3;
+    highlightFinalThree && index >= results.length - TARGET_HEADS;
 
   return (
     <div className="flex flex-col items-center p-6">
       <div className="flex flex-wrap justify-center mb-6 gap-3 min-h-[160px]">
-        {results.length === 0 ? (
+        {results.length === 0 && !isFlipping ? (
           // Idle coin - larger and not spinning
           <Coin
             result="heads"
@@ -99,7 +115,7 @@ const CoinFlipper: React.FC = () => {
           // Flipping coins
           results.map(({ result, shouldAnimate }, index) => (
             <Coin
-              key={`coin-${index}`}
+              key={`coin-${sequenceKey}-${index}`}
               result={result}
               shouldAnimate={shouldAnimate}
               onFlipComplete={() => handleFlipComplete(index)}
