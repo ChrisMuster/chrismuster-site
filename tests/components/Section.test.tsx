@@ -120,4 +120,37 @@ describe("Section Component", () => {
     expect(section).toHaveClass("bg-gray-100");
     expect(section).toHaveClass("custom");
   });
+
+  it("applies default minHeight of auto", () => {
+    const { container } = render(
+      <Section>
+        <p>Content</p>
+      </Section>
+    );
+    
+    const section = container.firstChild as HTMLElement;
+    expect(section.className).not.toContain("min-h-screen");
+  });
+
+  it("applies min-h-screen when minHeight is screen", () => {
+    const { container } = render(
+      <Section minHeight="screen">
+        <p>Content</p>
+      </Section>
+    );
+    
+    const section = container.firstChild as HTMLElement;
+    expect(section).toHaveClass("min-h-screen");
+  });
+
+  it("does not apply min-h-screen when minHeight is auto", () => {
+    const { container } = render(
+      <Section minHeight="auto">
+        <p>Content</p>
+      </Section>
+    );
+    
+    const section = container.firstChild as HTMLElement;
+    expect(section.className).not.toContain("min-h-screen");
+  });
 });
