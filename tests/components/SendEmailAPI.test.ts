@@ -48,6 +48,7 @@ describe("Send Email API Route", () => {
     delete process.env.SMTP_PORT;
     delete process.env.SMTP_USER;
     delete process.env.SMTP_PASS;
+    delete process.env.SMTP_FROM;
   });
 
   const createMockRequest = (body: object) => ({
@@ -249,7 +250,5 @@ describe("Send Email API Route", () => {
         from: '"John Doe" <custom@example.com>',
       })
     );
-
-    delete process.env.SMTP_FROM;
   });
 });
