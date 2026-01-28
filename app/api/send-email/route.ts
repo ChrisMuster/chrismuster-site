@@ -71,7 +71,7 @@ export async function POST(req: Request) {
 
     // Email content (use your verified email as the "From" address)
     const mailOptions = {
-      from: `"${name}" <chris@chrismuster.co.uk>`,
+      from: `"${name}" <christophermuster@yahoo.co.uk>`,
       replyTo: email,
       to: process.env.SMTP_USER,
       subject: subject,

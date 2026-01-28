@@ -45,6 +45,8 @@ export default function Header() {
           <button
             className="md:hidden text-2xl hover:text-[var(--color-blue)]"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
           >
             ☰
           </button>

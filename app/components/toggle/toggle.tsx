@@ -17,17 +17,19 @@ export default function Toggle({
     >
 
       {/* Hidden Label (for accessibility, linked to hidden checkbox) */}
-      <label id="theme-toggle" htmlFor="theme-toggle" className="sr-only"> {/* class = Screen Reader Only */}
+      <label id="theme-toggle-label" htmlFor="theme-toggle-input" className="sr-only"> {/* class = Screen Reader Only */}
         Toggle Theme
       </label>
 
       {/* Hidden checkbox for accessibility */}
       <input
         type="checkbox"
+        id="theme-toggle-input"
+        name="theme-toggle"
         checked={checked}
         onChange={onChange}
         className="absolute w-full h-full opacity-0"
-        aria-labelledby="theme-toggle"
+        aria-labelledby="theme-toggle-label"
       />
 
       {/* Background (switches color) */}

@@ -104,6 +104,7 @@ export default function RPSLSGame() {
             key={choice}
             onClick={() => playGame(choice)}
             className="p-2 bg-transparent border-none"
+            aria-label={`Choose ${choice}`}
           >
             <Image
               src={`/images/icons/${choice}-icon.png`}

@@ -147,6 +147,8 @@ export default function Battleship() {
             <input 
               ref={inputRef} 
               type="text" 
+              id="battleship-guess"
+              name="battleship-guess"
               placeholder="A0..." 
               className="w-[50%] p-3 bg-gray-700 text-green-400 border border-white uppercase"
               disabled={Object.values(shipsSunk).every((count, index) => count === SHIP_TYPES[index].count)} // Disable input if all ships are sunk

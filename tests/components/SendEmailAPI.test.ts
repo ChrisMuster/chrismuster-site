@@ -67,7 +67,7 @@ describe("Send Email API Route", () => {
     expect(mockTransporter.verify).toHaveBeenCalled();
     expect(mockTransporter.sendMail).toHaveBeenCalledWith(
       expect.objectContaining({
-        from: '"John Doe" <chris@chrismuster.co.uk>',
+        from: '"John Doe" <christophermuster@yahoo.co.uk>',
         replyTo: "john@example.com",
         subject: "Test Subject",
         text: expect.stringContaining("Test message content"),
