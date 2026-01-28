@@ -19,6 +19,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
+    // Sanitize inputs to prevent CRLF injection
+    const sanitizeInput = (input: string): string => input.replace(/[\r\n]/g, "");
+    
+    const sanitizedName = sanitizeInput(name);
+    const sanitizedEmail = sanitizeInput(email);
+    const sanitizedSubject = sanitizeInput(subject);
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(sanitizedEmail)) {
+      console.error("❌ Validation Error: Invalid email format");
+      return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
+    }
+
     // Ensure environment variables are set
     if (!process.env.SMTP_HOST || !process.env.SMTP_PORT || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
       console.error("❌ Missing SMTP configuration");
@@ -73,11 +87,14 @@ export async function POST(req: Request) {
 
     // Email content
     const mailOptions = {
-      from: `"${name}" <${fromAddress}>`,
-      replyTo: email,
+      from: {
+        name: sanitizedName,
+        address: fromAddress,
+      },
+      replyTo: sanitizedEmail,
       to: process.env.SMTP_USER,
-      subject: subject,
-      text: `From: ${name} (${email})\n\n${message}`,
+      subject: sanitizedSubject,
+      text: `From: ${sanitizedName} (${sanitizedEmail})\n\n${message}`,
     };
 
     if (isDev) {

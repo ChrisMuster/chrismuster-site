@@ -68,7 +68,10 @@ describe("Send Email API Route", () => {
     expect(mockTransporter.verify).toHaveBeenCalled();
     expect(mockTransporter.sendMail).toHaveBeenCalledWith(
       expect.objectContaining({
-        from: '"John Doe" <test@test.com>',
+        from: {
+          name: "John Doe",
+          address: "test@test.com",
+        },
         replyTo: "john@example.com",
         subject: "Test Subject",
         text: expect.stringContaining("Test message content"),
@@ -247,7 +250,81 @@ describe("Send Email API Route", () => {
 
     expect(mockTransporter.sendMail).toHaveBeenCalledWith(
       expect.objectContaining({
-        from: '"John Doe" <custom@example.com>',
+        from: {
+          name: "John Doe",
+          address: "custom@example.com",
+        },
+      })
+    );
+  });
+
+  it("returns 400 if email format is invalid", async () => {
+    const mockReq = createMockRequest({
+      name: "John Doe",
+      email: "invalid-email",
+      subject: "Test Subject",
+      message: "Test message",
+    });
+
+    await POST(mockReq);
+
+    expect(NextResponse.json).toHaveBeenCalledWith(
+      { error: "Invalid email format" },
+      { status: 400 }
+    );
+    expect(mockTransporter.sendMail).not.toHaveBeenCalled();
+  });
+
+  it("sanitizes CRLF characters from name", async () => {
+    const mockReq = createMockRequest({
+      name: "John\r\nDoe",
+      email: "john@example.com",
+      subject: "Test Subject",
+      message: "Test message",
+    });
+
+    await POST(mockReq);
+
+    expect(mockTransporter.sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        from: {
+          name: "JohnDoe",
+          address: "test@test.com",
+        },
+      })
+    );
+  });
+
+  it("sanitizes CRLF characters from email and validates format", async () => {
+    const mockReq = createMockRequest({
+      name: "John Doe",
+      email: "john\r\n@example.com",
+      subject: "Test Subject",
+      message: "Test message",
+    });
+
+    await POST(mockReq);
+
+    expect(mockTransporter.sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        replyTo: "john@example.com",
+      })
+    );
+  });
+
+  it("sanitizes CRLF characters from subject", async () => {
+    const mockReq = createMockRequest({
+      name: "John Doe",
+      email: "john@example.com",
+      subject: "Test\r\nSubject",
+      message: "Test message",
+    });
+
+    await POST(mockReq);
+
+    expect(mockTransporter.sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        subject: "TestSubject",
       })
     );
   });
