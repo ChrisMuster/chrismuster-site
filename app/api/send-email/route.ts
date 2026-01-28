@@ -39,7 +39,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "SMTP configuration error" }, { status: 500 });
     }
 
-    const fromAddress = process.env.SMTP_FROM || process.env.SMTP_USER;
+    const fromAddress = sanitizeInput(process.env.SMTP_FROM || process.env.SMTP_USER);
+    
+    // Validate fromAddress format
+    if (!emailRegex.test(fromAddress)) {
+      console.error("❌ Invalid SMTP_FROM or SMTP_USER configuration");
+      return NextResponse.json({ error: "SMTP configuration error" }, { status: 500 });
+    }
 
     if (isDev) {
       console.log("🔧 SMTP Config:", {

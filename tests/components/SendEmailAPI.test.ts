@@ -159,6 +159,24 @@ describe("Send Email API Route", () => {
     );
   });
 
+  it("returns 500 if SMTP_USER has invalid email format", async () => {
+    process.env.SMTP_USER = "invalid-email";
+
+    const mockReq = createMockRequest({
+      name: "John Doe",
+      email: "john@example.com",
+      subject: "Test Subject",
+      message: "Test message",
+    });
+
+    await POST(mockReq);
+
+    expect(NextResponse.json).toHaveBeenCalledWith(
+      { error: "SMTP configuration error" },
+      { status: 500 }
+    );
+  });
+
   it("returns 500 if SMTP connection fails", async () => {
     mockTransporter.verify.mockRejectedValue(new Error("Connection failed"));
 
