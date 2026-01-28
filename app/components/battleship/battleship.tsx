@@ -144,9 +144,14 @@ export default function Battleship() {
 
           {/* Show Input & Fire button ONLY on large screens and above */}
           <div className="hidden lg:flex flex-row items-center justify-between gap-4 mt-4" >
+            <label htmlFor="battleship-guess" className="sr-only">
+              Enter your guess (letter A-H and number 0-7)
+            </label>
             <input 
               ref={inputRef} 
               type="text" 
+              id="battleship-guess"
+              name="battleship-guess"
               placeholder="A0..." 
               className="w-[50%] p-3 bg-gray-700 text-green-400 border border-white uppercase"
               disabled={Object.values(shipsSunk).every((count, index) => count === SHIP_TYPES[index].count)} // Disable input if all ships are sunk

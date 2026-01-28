@@ -6,7 +6,7 @@ describe("useShips integration", () => {
   const iterations = 1000;
 
   it(`generates ships with no overlapping locations over ${iterations} runs`, () => {
-    for (let i = 0; i < iterations; i++) {
+    for (let iteration = 0; iteration < iterations; iteration++) {
       const { result, unmount } = renderHook(() => useShips(boardSize));
 
       act(() => {

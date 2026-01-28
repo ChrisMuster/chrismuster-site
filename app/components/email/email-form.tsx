@@ -91,6 +91,7 @@ const EmailForm = () => {
                   type="text"
                   name="name"
                   placeholder={name_placeholder}
+                  autoComplete="name"
                   aria-required="true"
                   aria-invalid={touched.name && !!errors.name}
                   aria-describedby="name-error"
@@ -112,6 +113,7 @@ const EmailForm = () => {
                   type="email"
                   name="email"
                   placeholder={email_placeholder}
+                  autoComplete="email"
                   aria-required="true"
                   aria-invalid={touched.email && !!errors.email}
                   aria-describedby="email-error"

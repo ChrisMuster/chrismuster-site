@@ -29,7 +29,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className = ""
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <div

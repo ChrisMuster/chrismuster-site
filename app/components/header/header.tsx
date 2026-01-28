@@ -45,6 +45,9 @@ export default function Header() {
           <button
             className="md:hidden text-2xl hover:text-[var(--color-blue)]"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             ☰
           </button>
@@ -56,7 +59,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white text-[var(--color-primary)] border-t">
+        <div id="mobile-menu" className="md:hidden bg-white text-[var(--color-primary)] border-t">
           {header.nav.map((section) => (
             <button
               key={section}

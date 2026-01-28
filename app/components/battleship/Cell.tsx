@@ -2,8 +2,12 @@ import React from "react";
 import { CellProps } from "@/components/battleship/battleship.types";
 
 const getCellText = (isHit: boolean, isMiss: boolean) => {
-  if (isHit) return "HIT";
-  if (isMiss) return "MISS";
+  if (isHit) {
+    return "HIT";
+  }
+  if (isMiss) {
+    return "MISS";
+  }
   return "";
 };
 

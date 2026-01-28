@@ -38,8 +38,8 @@ const CoinFlipper: React.FC = () => {
 
   const handleFlipComplete = (index: number) => {
     setResults((prev) => {
-      const updated = prev.map((coin, i) =>
-        i === index ? { ...coin, shouldAnimate: false } : coin
+      const updated = prev.map((coin, coinIndex) =>
+        coinIndex === index ? { ...coin, shouldAnimate: false } : coin
       );
 
       // Check for final 3 completed heads in updated results

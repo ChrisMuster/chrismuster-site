@@ -41,7 +41,7 @@ describe("Header Component", () => {
     const user = userEvent.setup();
     render(<Header />);
     
-    const hamburger = screen.getByRole("button", { name: "☰" });
+    const hamburger = screen.getByRole("button", { name: "Toggle navigation menu" });
     await user.click(hamburger);
     
     // Mobile menu should now be visible with duplicate nav items
@@ -54,7 +54,7 @@ describe("Header Component", () => {
     render(<Header />);
     
     // Open mobile menu
-    const hamburger = screen.getByRole("button", { name: "☰" });
+    const hamburger = screen.getByRole("button", { name: "Toggle navigation menu" });
     await user.click(hamburger);
     
     // Click a mobile nav item
