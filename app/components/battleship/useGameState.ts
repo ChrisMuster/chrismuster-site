@@ -39,7 +39,7 @@ export function useGameState(
 
         const allSunk = Object.entries(newShipsSunk).every(([ship, count]) => count === SHIP_TYPES.find(s => s.name === ship)?.count);
 
-        let message;
+        let message: string;
         if (allSunk) {
           message = `You sank all ships in ${guesses.length + 1} guesses! Game Over!`;
         } else if (hit) {

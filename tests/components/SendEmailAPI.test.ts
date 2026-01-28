@@ -67,7 +67,7 @@ describe("Send Email API Route", () => {
     expect(mockTransporter.verify).toHaveBeenCalled();
     expect(mockTransporter.sendMail).toHaveBeenCalledWith(
       expect.objectContaining({
-        from: '"John Doe" <christophermuster@yahoo.co.uk>',
+        from: '"John Doe" <test@test.com>',
         replyTo: "john@example.com",
         subject: "Test Subject",
         text: expect.stringContaining("Test message content"),
@@ -230,5 +230,26 @@ describe("Send Email API Route", () => {
         text: "From: John Doe (john@example.com)\n\nTest message content",
       })
     );
+  });
+
+  it("uses SMTP_FROM when provided instead of SMTP_USER", async () => {
+    process.env.SMTP_FROM = "custom@example.com";
+
+    const mockReq = createMockRequest({
+      name: "John Doe",
+      email: "john@example.com",
+      subject: "Test Subject",
+      message: "Test message",
+    });
+
+    await POST(mockReq);
+
+    expect(mockTransporter.sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        from: '"John Doe" <custom@example.com>',
+      })
+    );
+
+    delete process.env.SMTP_FROM;
   });
 });

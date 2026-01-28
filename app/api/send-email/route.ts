@@ -25,6 +25,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "SMTP configuration error" }, { status: 500 });
     }
 
+    const fromAddress = process.env.SMTP_FROM || process.env.SMTP_USER;
+
     if (isDev) {
       console.log("🔧 SMTP Config:", {
         host: process.env.SMTP_HOST,
@@ -69,9 +71,9 @@ export async function POST(req: Request) {
       }, { status: 500 });
     }
 
-    // Email content (use your verified email as the "From" address)
+    // Email content
     const mailOptions = {
-      from: `"${name}" <christophermuster@yahoo.co.uk>`,
+      from: `"${name}" <${fromAddress}>`,
       replyTo: email,
       to: process.env.SMTP_USER,
       subject: subject,

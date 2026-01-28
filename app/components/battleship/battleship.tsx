@@ -144,6 +144,9 @@ export default function Battleship() {
 
           {/* Show Input & Fire button ONLY on large screens and above */}
           <div className="hidden lg:flex flex-row items-center justify-between gap-4 mt-4" >
+            <label htmlFor="battleship-guess" className="sr-only">
+              Enter your guess (letter A-H and number 0-7)
+            </label>
             <input 
               ref={inputRef} 
               type="text" 
